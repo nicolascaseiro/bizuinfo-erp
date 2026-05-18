@@ -1,0 +1,25 @@
+body {
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.card {
+    width: 450px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.link {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: #2196F3;
+    text-decoration: underline;
+}
