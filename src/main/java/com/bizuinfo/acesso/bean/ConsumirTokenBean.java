@@ -4,6 +4,7 @@ import com.bizuinfo.acesso.model.TipoToken;
 import com.bizuinfo.acesso.service.LinkMagicoService;
 import com.bizuinfo.usuario.dao.UsuarioDAO;
 import com.bizuinfo.usuario.model.Usuario;
+import com.bizuinfo.usuario.model.Role;
 
 import com.bizuinfo.web.Paginas;
 import jakarta.annotation.PostConstruct;
@@ -91,15 +92,15 @@ public class ConsumirTokenBean implements Serializable {
 
     private String dashboard(Usuario usuario) {
 
-        return switch (usuario.getRole()) {
+        if (usuario.getRoles().contains(Role.ADMIN)) {
+            return Paginas.DASHBOARD_ADMIN;
+        }
 
-            case ADMIN ->
-                Paginas.DASHBOARD_ADMIN;
-            case GERENTE ->
-                Paginas.DASHBOARD_GERENTE;
-            default ->
-                Paginas.DASHBOARD;
-        };
+        if (usuario.getRoles().contains(Role.GERENTE)) {
+            return Paginas.DASHBOARD_GERENTE;
+        }
+
+        return Paginas.DASHBOARD;
     }
 
     private void redirecionar(String pagina) {

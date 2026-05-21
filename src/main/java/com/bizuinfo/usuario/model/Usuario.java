@@ -3,6 +3,8 @@ package com.bizuinfo.usuario.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "usuario")
@@ -21,14 +23,18 @@ public class Usuario {
     @Column(name = "senha", nullable = false)
     private String senha;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+            name = "usuario_roles",
+            joinColumns = @JoinColumn(name = "usuario_id")
+    )
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
-    private Role role;
+    private Set<Role> roles = new HashSet<>();
 
     @Column(name = "email_verificado", nullable = false)
     private boolean emailVerificado = false;
 
-    // Confirmação de Email
     @Column(name = "token_verificacao")
     private String tokenVerificacao;
 
@@ -56,7 +62,7 @@ public class Usuario {
         this.email = email;
         this.senha = senha;
         this.emailVerificado = false;
-        this.role = Role.FUNCIONARIO;
+        this.roles.add(Role.FUNCIONARIO);
 
     }
 
@@ -65,7 +71,7 @@ public class Usuario {
     public String getNome() { return nome; }
     public String getEmail() { return email; }
     public String getSenha() { return senha; }
-    public Role getRole() { return role; }
+    public Set<Role> getRoles() { return roles; }
     public boolean getEmailVerificado() { return emailVerificado; }
     public String getTokenVerificacao() { return tokenVerificacao; }
     public LocalDateTime getTokenVerificacaoExpiracao() { return tokenVerificacaoExpiracao; }
@@ -77,7 +83,7 @@ public class Usuario {
     public void setNome(String nome) { this.nome = nome; }
     public void setEmail(String email) { this.email = email; }
     public void setSenha(String senha) { this.senha = senha; }
-    public void setRole(Role role) { this.role = role; }
+    public void setRoles(Set<Role> roles) { this.roles = roles; }
     public void setEmailVerificado(boolean emailVerificado) { this.emailVerificado = emailVerificado; }
     public void setTokenVerificacao(String tokenVerificacao) { this.tokenVerificacao = tokenVerificacao; }
     public void setTokenVerificacaoExpiracao(LocalDateTime expiracao) { this.tokenVerificacaoExpiracao = expiracao; }

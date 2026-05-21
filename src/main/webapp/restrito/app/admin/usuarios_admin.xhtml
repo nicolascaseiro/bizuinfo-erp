@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Admin - Usuários BizuInfo</title>
+
+    <h:outputStylesheet library="css" name="estilo.css"/>
+</h:head>
+
+<h:body>
+
+    <h:form>
+
+        <p:panel header="Gestão de Usuários">
+
+            <p:dataTable value="#{usuarioAdminBean.usuarios}"
+                         var="u"
+                         paginator="true"
+                         rows="10">
+
+                <p:column headerText="ID">
+                    #{u.id}
+                </p:column>
+
+                <p:column headerText="Nome">
+                    #{u.nome}
+                </p:column>
+
+                <p:column headerText="Email">
+                    #{u.email}
+                </p:column>
+
+                <p:column headerText="Roles">
+                    <ui:repeat value="#{u.roles.toArray()}" var="r">
+                        #{r} <br/>
+                    </ui:repeat>
+                </p:column>
+
+                <p:column headerText="Email Verificado">
+                    #{u.emailVerificado}
+                </p:column>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>

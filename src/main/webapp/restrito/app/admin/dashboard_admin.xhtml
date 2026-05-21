@@ -29,6 +29,12 @@
                 <h:outputText
                         value="Email: #{loginBean.email}" />
 
+                <p:commandButton value="Usuários"
+                                 icon="pi pi-users"
+                                 ajax="false"
+                                 action="/restrito/app/admin/usuarios_admin.xhtml?faces-redirect=true"
+                                 styleClass="full-width p-mt-2" />
+
                 <!-- REMOVER depois -->
                 <h:outputText
                         value="Senha: #{loginBean.senha}" />

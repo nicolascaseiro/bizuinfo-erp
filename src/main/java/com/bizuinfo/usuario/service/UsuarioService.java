@@ -34,7 +34,10 @@ public class UsuarioService {
 
         Usuario usuario = uDAO.buscarPorId(idUsuario)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + idUsuario));
-        usuario.setRole(Role.valueOf(novaRole));
+
+        Role role = Role.valueOf(novaRole);
+
+        usuario.getRoles().add(role);
 
         uDAO.salvar(usuario);
     }
