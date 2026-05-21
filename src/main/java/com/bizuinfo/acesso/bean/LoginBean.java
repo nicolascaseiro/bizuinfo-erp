@@ -35,6 +35,7 @@ public class LoginBean implements Serializable {
         Optional<Usuario> usuarioOptional = usuarioDAO.buscarPorEmail(email);
 
         if (usuarioOptional.isEmpty()) {
+            // Dica: Adicione uma mensagem de erro ao FacesContext para o usuário saber que falhou
             return null;
         }
 
@@ -49,10 +50,14 @@ public class LoginBean implements Serializable {
             return Paginas.CONFIRMAR_EMAIL + "?faces-redirect=true";
         }
 
+        // --- AQUI ESTÁ O QUE FALTAVA ---
+        this.usuarioLogado = usuario;
+        // -------------------------------
+
         FacesContext.getCurrentInstance()
-                    .getExternalContext()
-                    .getSessionMap()
-                    .put("usuario", usuario);
+                .getExternalContext()
+                .getSessionMap()
+                .put("usuario", usuario);
 
         return Paginas.DASHBOARD + "?faces-redirect=true";
     }

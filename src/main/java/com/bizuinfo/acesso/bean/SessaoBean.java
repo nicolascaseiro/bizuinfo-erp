@@ -1,34 +1,30 @@
 package com.bizuinfo.acesso.bean;
 
 import com.bizuinfo.usuario.model.Usuario;
-import com.bizuinfo.web.Paginas;
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.context.FacesContext;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
+import java.io.Serializable;
 
 @Named
-@RequestScoped
-public class SessaoBean {
+@SessionScoped // Agora ele persiste enquanto a sessão durar
+public class SessaoBean implements Serializable {
 
-    public String dashboard() {
+    private static final long serialVersionUID = 1L;
+    private Usuario usuarioLogado;
 
-        Usuario usuario = (Usuario) FacesContext
-            .getCurrentInstance()
-            .getExternalContext()
-            .getSessionMap()
-            .get("usuario");
+    public void login(Usuario usuario) {
+        this.usuarioLogado = usuario;
+    }
 
-        if (usuario == null) {
-            return Paginas.LOGIN;
-        }
+    public void logout() {
+        this.usuarioLogado = null;
+    }
 
-        return switch (usuario.getRole()) {
-            case ADMIN ->
-                Paginas.DASHBOARD_ADMIN;
-            case GERENTE ->
-                Paginas.DASHBOARD_GERENTE;
-            default ->
-                Paginas.DASHBOARD;
-        };
+    public boolean isLogado() {
+        return usuarioLogado != null;
+    }
+
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
     }
 }

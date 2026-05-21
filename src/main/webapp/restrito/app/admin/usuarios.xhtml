@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Usuários - BizuInfo</title>
+
+    <h:outputStylesheet library="css" name="estilo.css"/>
+</h:head>
+
+<h:body>
+
+    <h:form id="formUsuario">
+
+        <p:dataTable id="tabelaUsuarios" value="#{usuarioBean.listaUsuarios}" var="usuario" paginator="true" rows="10">
+            <p:column headerText="Nome">
+                <h:outputText value="#{usuario.nome}" />
+            </p:column>
+            <p:column headerText="E-mail">
+                <h:outputText value="#{usuario.email}" />
+            </p:column>
+            <p:column headerText="Perfil">
+                <h:outputText value="#{usuario.perfil}" />
+            </p:column>
+            <p:column headerText="Ações">
+                <p:commandButton icon="pi pi-pencil"
+                                 action="#{usuarioBean.prepararEdicao(usuario)}"
+                                 oncomplete="PF('dlgUsuario').show()"
+                                 update=":formDialogo" />
+            </p:column>
+        </p:dataTable>
+    </h:form>
+
+    <p:dialog widgetVar="dlgUsuario" header="Gerenciar Usuário" modal="true" resizable="false">
+    <h:form id="formDialogo">
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Perfil:" />
+            <p:selectOneMenu value="#{usuarioBean.usuarioSelecionado.perfil}">
+                <f:selectItem itemLabel="Funcionário" itemValue="FUNCIONARIO" />
+                <f:selectItem itemLabel="Gerente" itemValue="GERENTE" />
+                <f:selectItem itemLabel="Administrador" itemValue="ADMIN" />
+            </p:selectOneMenu>
+        </h:panelGrid>
+
+        <p:commandButton value="Salvar Alterações"
+                         action="#{usuarioBean.salvar}"
+                         oncomplete="PF('dlgUsuario').hide()"
+                         update=":formUsuario:tabelaUsuarios" />
+    </h:form>
+    </p:dialog>
+</h:body>
+</html>
