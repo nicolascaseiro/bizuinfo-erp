@@ -2,6 +2,7 @@ package com.bizuinfo.usuario.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "log_auditoria")
@@ -44,4 +45,15 @@ public class LogAuditoria {
     public void setDataHora(LocalDateTime dataHora) { this.dataHora = dataHora; }
     public String getUsuarioResponsavel() { return usuarioResponsavel; }
     public void setUsuarioResponsavel(String usuarioResponsavel) { this.usuarioResponsavel = usuarioResponsavel; }
+
+    public String getDataHoraFormatada() {
+        if (dataHora == null) {
+            return "";
+        }
+
+        DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        return dataHora.format(formatter);
+    }
 }

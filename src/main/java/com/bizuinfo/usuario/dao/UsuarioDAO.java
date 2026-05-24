@@ -91,11 +91,11 @@ public class UsuarioDAO {
         try {
             em.getTransaction().begin();
 
-            Usuario u = em.find(Usuario.class, id);
+            Usuario ref = em.getReference(Usuario.class, id);
 
-            if (u != null) {
-                em.remove(u);
-            }
+            em.remove(ref);
+
+            em.flush(); // força execução imediata do DELETE
 
             em.getTransaction().commit();
 
@@ -105,7 +105,7 @@ public class UsuarioDAO {
                 em.getTransaction().rollback();
             }
 
-            throw e;
+            throw new RuntimeException("Erro ao excluir usuário: " + e.getMessage(), e);
 
         } finally {
             em.close();

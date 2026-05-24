@@ -70,6 +70,8 @@ CREATE TABLE IF NOT EXISTS log_auditoria (
                                              usuario_responsavel VARCHAR(100)
 ) ENGINE=InnoDB;
 
+DELETE FROM log_auditoria WHERE id=8;
+
 INSERT INTO usuario (nome, email, senha, role, email_verificado) VALUES
                                                                      ('Joao Paulo', 'bizuinfo.contato@gmail.com', 'admin', 'ADMIN', TRUE),
                                                                      ('Miguel Fernandes', '', 'admin', 'FUNCIONARIO', TRUE),

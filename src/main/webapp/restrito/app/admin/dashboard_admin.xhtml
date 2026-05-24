@@ -115,49 +115,101 @@
                     <p:dataTable id="tabelaUsuarios"
                                  value="#{usuarioAdminBean.usuarios}"
                                  var="u"
+                                 editable="true"
+                                 editMode="row"
                                  paginator="true"
                                  rows="8"
                                  emptyMessage="Nenhum usuário encontrado">
 
-                        <p:column headerText="ID">#{u.id}</p:column>
+                        <p:ajax event="rowEdit"
+                                listener="#{usuarioAdminBean.salvar}"
+                                update=":formDashboard:growl"/>
+
+                        <p:column headerText="ID">
+                            #{u.id}
+                        </p:column>
 
                         <p:column headerText="Nome">
-                            <p:inputText value="#{u.nome}" style="width:100%"/>
+
+                            <p:cellEditor>
+
+                                <f:facet name="output">
+                                    <h:outputText value="#{u.nome}"/>
+                                </f:facet>
+
+                                <f:facet name="input">
+                                    <p:inputText value="#{u.nome}" style="width:100%"/>
+                                </f:facet>
+
+                            </p:cellEditor>
+
                         </p:column>
 
                         <p:column headerText="Email">
-                            <p:inputText value="#{u.email}" style="width:100%"/>
+
+                            <p:cellEditor>
+
+                                <f:facet name="output">
+                                    <h:outputText value="#{u.email}"/>
+                                </f:facet>
+
+                                <f:facet name="input">
+                                    <p:inputText value="#{u.email}" style="width:100%"/>
+                                </f:facet>
+
+                            </p:cellEditor>
+
                         </p:column>
 
                         <p:column headerText="Perfil">
-                            <p:selectOneMenu value="#{u.role}" style="width:160px">
 
-                                <f:selectItem itemLabel="FUNCIONARIO"
-                                              itemValue="#{com.bizuinfo.usuario.model.Role.FUNCIONARIO}"/>
+                            <p:cellEditor>
 
-                                <f:selectItem itemLabel="GERENTE"
-                                              itemValue="#{com.bizuinfo.usuario.model.Role.GERENTE}"/>
+                                <f:facet name="output">
+                                    <h:outputText value="#{u.roleString}"/>
+                                </f:facet>
 
-                                <f:selectItem itemLabel="ADMIN"
-                                              itemValue="#{com.bizuinfo.usuario.model.Role.ADMIN}"/>
+                                <f:facet name="input">
 
-                            </p:selectOneMenu>
+                                    <p:selectOneMenu value="#{u.roleString}">
+                                                     disabled="#{loginBean.usuarioLogado.id == u.id}">
+
+                                        <f:selectItem itemLabel="FUNCIONARIO"
+                                                      itemValue="FUNCIONARIO"/>
+
+                                        <f:selectItem itemLabel="GERENTE"
+                                                      itemValue="GERENTE"/>
+
+                                        <f:selectItem itemLabel="ADMIN"
+                                                      itemValue="ADMIN"/>
+
+                                    </p:selectOneMenu>
+
+                                </f:facet>
+
+                            </p:cellEditor>
+
                         </p:column>
 
                         <p:column headerText="Status">
+
                             <h:outputText value="#{u.emailVerificado ? 'ATIVO' : 'INATIVO'}"
                                           styleClass="#{u.emailVerificado ? 'status-ativo' : 'status-inativo'}"/>
+
                         </p:column>
 
-                        <p:column headerText="Ações">
+                        <p:column style="width:120px">
 
-                            <p:commandButton icon="pi pi-save"
-                                             value="Salvar"
-                                             action="#{usuarioAdminBean.salvar(u)}"
-                                             update=":formDashboard:tabelaUsuarios :formDashboard:growl"/>
+                            <p:rowEditor/>
+
+                        </p:column>
+
+                        <p:column headerText="Excluir">
 
                             <p:commandButton icon="pi pi-trash"
                                              value="Excluir"
+                                             process="@this"
+                                             update=":formDashboard:growl"
                                              action="#{usuarioAdminBean.prepararExclusao(u)}"
                                              oncomplete="PF('dlgExcluir').show()"/>
 
@@ -180,7 +232,7 @@
                                  emptyMessage="Nenhum log encontrado">
 
                         <p:column headerText="Data/Hora">
-                            #{l.dataHora}
+                            #{l.dataHoraFormatada}
                         </p:column>
 
                         <p:column headerText="Ação">
@@ -209,6 +261,7 @@
                          severity="warn">
 
             <p:commandButton value="Sim"
+                             process="@this"
                              action="#{usuarioAdminBean.excluirSelecionado}"
                              update=":formDashboard:conteudo :formDashboard:growl"
                              oncomplete="PF('dlgExcluir').hide()"/>

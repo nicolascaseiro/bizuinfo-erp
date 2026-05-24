@@ -65,6 +65,9 @@ public class Usuario {
     public LocalDateTime getTokenExpiracao() { return tokenExpiracao; }
     public String getTokenReset() { return tokenReset; }
 
+    public String getRoleString() { return role != null ? role.name() : null; }
+
+
     // Setters
     public void setNome(String nome) { this.nome = nome; }
     public void setEmail(String email) { this.email = email; }
@@ -74,4 +77,6 @@ public class Usuario {
     public void setTokenVerificacao(String tokenVerificacao) { this.tokenVerificacao = tokenVerificacao; }
     public void setTokenExpiracao(LocalDateTime expiracao) { this.tokenExpiracao = expiracao; }
     public void setTokenReset(String tokenReset) { this.tokenReset = tokenReset; }
+
+    public void setRoleString(String role) { this.role = (role != null) ? Role.valueOf(role) : null; }
 }
