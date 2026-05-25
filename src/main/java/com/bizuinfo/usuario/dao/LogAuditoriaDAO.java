@@ -1,6 +1,6 @@
 package com.bizuinfo.usuario.dao;
 
-import com.bizuinfo.acesso.util.JPAutil;
+import com.bizuinfo.infra.util.JPAutil;
 import com.bizuinfo.usuario.model.LogAuditoria;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
@@ -27,9 +27,7 @@ public class LogAuditoriaDAO {
                 em.getTransaction().rollback();
             }
 
-            e.printStackTrace();
-            throw e;
-
+            throw new RuntimeException("Erro ao enviar email", e);
         } finally {
             em.close();
         }
@@ -37,16 +35,12 @@ public class LogAuditoriaDAO {
 
     public List<LogAuditoria> listarTodos() {
 
-        EntityManager em = JPAutil.getEntityManager();
-
-        try {
+        try (EntityManager em = JPAutil.getEntityManager()) {
             return em.createQuery(
                     "SELECT l FROM LogAuditoria l ORDER BY l.dataHora DESC",
                     LogAuditoria.class
             ).getResultList();
 
-        } finally {
-            em.close();
         }
     }
 }

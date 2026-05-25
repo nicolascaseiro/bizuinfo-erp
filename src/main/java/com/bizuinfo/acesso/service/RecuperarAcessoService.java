@@ -44,7 +44,7 @@ public class RecuperarAcessoService {
                 "http://localhost:8080/"
                         + "bizuinfo_erp_war_exploded/"
                         + "publico/acesso/consumir-token.xhtml?token="
-                        + usuario.getTokenRecuperacao();
+                        + usuario.getTokenReset();
 
         String conteudo =
                 "Clique no link para recuperar acesso:<br><br>"
