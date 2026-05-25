@@ -5,6 +5,7 @@ import com.bizuinfo.usuario.model.Usuario;
 import com.bizuinfo.web.Paginas;
 
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -32,15 +33,29 @@ public class LoginBean implements Serializable {
         Usuario usuario = loginService.autenticar(email, senha);
 
         if (usuario == null) {
+
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR,
+                            "Email ou senha inválidos",
+                            null
+                    )
+            );
+
             return null;
+        }
+
+        if (!usuario.getEmailVerificado()) {
+            return Paginas.CONFIRMAR_EMAIL + "?faces-redirect=true";
         }
 
         usuarioLogado = usuario;
 
         FacesContext.getCurrentInstance()
-                    .getExternalContext()
-                    .getSessionMap()
-                    .put("usuario", usuario);
+                .getExternalContext()
+                .getSessionMap()
+                .put("usuario", usuario);
 
         return switch (usuario.getRole()) {
 
@@ -58,8 +73,10 @@ public class LoginBean implements Serializable {
     public String sair() {
 
         FacesContext.getCurrentInstance()
-                    .getExternalContext()
-                    .invalidateSession();
+                .getExternalContext()
+                .invalidateSession();
+
+        usuarioLogado = null;
 
         return Paginas.LOGIN + "?faces-redirect=true";
     }
@@ -68,23 +85,23 @@ public class LoginBean implements Serializable {
         return usuarioLogado != null;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public String getEmail() {
+        return email;
     }
 
     public String getSenha() {
         return senha;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public Usuario getUsuarioLogado() {
         return usuarioLogado;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }

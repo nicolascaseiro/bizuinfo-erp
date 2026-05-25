@@ -3,6 +3,8 @@ package com.bizuinfo.usuario.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "usuario")
@@ -28,23 +30,15 @@ public class Usuario {
     @Column(name = "email_verificado", nullable = false)
     private boolean emailVerificado = false;
 
-    // Confirmação de Email
     @Column(name = "token_verificacao")
     private String tokenVerificacao;
 
-    @Column(name = "token_verificacao_expiracao")
-    private LocalDateTime tokenVerificacaoExpiracao;
+    @Column(name = "token_expiracao")
+    private LocalDateTime tokenExpiracao;
 
     // Recuperação de acesso
-    @Column(name = "token_recuperacao")
-    private String tokenRecuperacao;
-
-    @Column(name = "token_recuperacao_expiracao")
-    private LocalDateTime tokenRecuperacaoExpiracao;
-
-    // Controle de reenvio
-    @Column(name = "token_ultimo_envio")
-    private LocalDateTime ultimoEnvioToken;
+    @Column(name = "token_reset")
+    private String tokenReset;
 
     // Construtor JPA
     public Usuario() {}
@@ -68,10 +62,11 @@ public class Usuario {
     public Role getRole() { return role; }
     public boolean getEmailVerificado() { return emailVerificado; }
     public String getTokenVerificacao() { return tokenVerificacao; }
-    public LocalDateTime getTokenVerificacaoExpiracao() { return tokenVerificacaoExpiracao; }
-    public String getTokenRecuperacao() { return tokenRecuperacao; }
-    public LocalDateTime getTokenRecuperacaoExpiracao() { return tokenRecuperacaoExpiracao; }
-    public LocalDateTime getUltimoEnvioToken() { return ultimoEnvioToken; }
+    public LocalDateTime getTokenExpiracao() { return tokenExpiracao; }
+    public String getTokenReset() { return tokenReset; }
+
+    public String getRoleString() { return role != null ? role.name() : null; }
+
 
     // Setters
     public void setNome(String nome) { this.nome = nome; }
@@ -80,8 +75,8 @@ public class Usuario {
     public void setRole(Role role) { this.role = role; }
     public void setEmailVerificado(boolean emailVerificado) { this.emailVerificado = emailVerificado; }
     public void setTokenVerificacao(String tokenVerificacao) { this.tokenVerificacao = tokenVerificacao; }
-    public void setTokenVerificacaoExpiracao(LocalDateTime expiracao) { this.tokenVerificacaoExpiracao = expiracao; }
-    public void setTokenRecuperacao(String tokenRecuperacao) { this.tokenRecuperacao = tokenRecuperacao; }
-    public void setTokenRecuperacaoExpiracao(LocalDateTime expiracao) { this.tokenRecuperacaoExpiracao = expiracao; }
-    public void setUltimoEnvioToken(LocalDateTime t) { this.ultimoEnvioToken = t; }
+    public void setTokenExpiracao(LocalDateTime expiracao) { this.tokenExpiracao = expiracao; }
+    public void setTokenReset(String tokenReset) { this.tokenReset = tokenReset; }
+
+    public void setRoleString(String role) { this.role = (role != null) ? Role.valueOf(role) : null; }
 }

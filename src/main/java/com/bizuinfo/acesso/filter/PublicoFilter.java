@@ -1,6 +1,7 @@
 package com.bizuinfo.acesso.filter;
 
 import com.bizuinfo.usuario.model.Usuario;
+import com.bizuinfo.usuario.model.Role;
 
 import com.bizuinfo.web.Paginas;
 import jakarta.servlet.*;
@@ -29,14 +30,17 @@ public class PublicoFilter implements Filter {
 
         if (usuario != null) {
 
-            String destino = switch (usuario.getRole()) {
-                case ADMIN ->
-                    Paginas.DASHBOARD_ADMIN;
-                case GERENTE ->
-                    Paginas.DASHBOARD_GERENTE;
-                default ->
-                    Paginas.DASHBOARD;
-            };
+            String destino;
+
+            if (usuario.getRole() == Role.ADMIN) {
+                destino = Paginas.DASHBOARD_ADMIN;
+
+            } else if (usuario.getRole() == Role.GERENTE) {
+                destino = Paginas.DASHBOARD_GERENTE;
+
+            } else {
+                destino = Paginas.DASHBOARD;
+            }
 
             res.sendRedirect(req.getContextPath() + destino);
             return;

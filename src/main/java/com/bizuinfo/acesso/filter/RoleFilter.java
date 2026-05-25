@@ -48,17 +48,17 @@ public class RoleFilter implements Filter {
 
         Role role = usuario.getRole();
 
-        if (adminArea && role != Role.ADMIN) {
+        if (adminArea && !role.temPermissao(Role.ADMIN)) {
             acessoNegado(req, res);
             return;
         }
 
-        if (gerenteArea && role != Role.GERENTE && role != Role.ADMIN) {
+        if (gerenteArea && !role.temPermissao(Role.GERENTE)) {
             acessoNegado(req, res);
             return;
         }
 
-        if (funcionarioArea && role != Role.FUNCIONARIO && role != Role.GERENTE && role != Role.ADMIN) {
+        if (funcionarioArea && !role.temPermissao(Role.FUNCIONARIO)) {
             acessoNegado(req, res);
             return;
         }

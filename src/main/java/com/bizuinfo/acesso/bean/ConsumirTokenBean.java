@@ -29,9 +29,9 @@ public class ConsumirTokenBean implements Serializable {
         }
 
         FacesContext.getCurrentInstance()
-                    .getExternalContext()
-                    .getSessionMap()
-                    .put("usuario", usuario);
+                .getExternalContext()
+                .getSessionMap()
+                .put("usuario", usuario);
 
         return Paginas.DASHBOARD + "?faces-redirect=true";
     }

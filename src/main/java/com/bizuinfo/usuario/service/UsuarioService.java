@@ -2,6 +2,7 @@ package com.bizuinfo.usuario.service;
 
 import com.bizuinfo.usuario.dao.UsuarioDAO;
 import com.bizuinfo.usuario.model.Usuario;
+import com.bizuinfo.usuario.model.Role;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.mindrot.jbcrypt.BCrypt;
@@ -27,5 +28,17 @@ public class UsuarioService {
         uDAO.salvar(usuario);
 
         return true;
+    }
+
+    public void alterarPerfil(Long idUsuario, String novaRole) {
+
+        Usuario usuario = uDAO.buscarPorId(idUsuario)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + idUsuario));
+
+        Role role = Role.valueOf(novaRole);
+
+        usuario.setRole(role);
+
+        uDAO.salvar(usuario);
     }
 }
