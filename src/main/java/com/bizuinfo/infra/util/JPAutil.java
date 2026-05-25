@@ -1,4 +1,4 @@
-package com.bizuinfo.acesso.util;
+package com.bizuinfo.infra.service.util;
 
 import jakarta.persistence.Persistence;
 import jakarta.persistence.EntityManager;
