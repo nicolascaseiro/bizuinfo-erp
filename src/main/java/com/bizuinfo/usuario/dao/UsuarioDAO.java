@@ -1,6 +1,6 @@
 package com.bizuinfo.usuario.dao;
 
-import com.bizuinfo.acesso.util.JPAutil;
+import com.bizuinfo.infra.util.JPAutil;
 import com.bizuinfo.usuario.model.Usuario;
 
 import jakarta.enterprise.context.ApplicationScoped;

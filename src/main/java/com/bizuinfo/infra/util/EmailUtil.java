@@ -1,4 +1,4 @@
-package com.bizuinfo.infra.service.util;
+package com.bizuinfo.infra.util;
 
 import jakarta.mail.internet.AddressException;
 import jakarta.mail.internet.InternetAddress;
