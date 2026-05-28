@@ -5,6 +5,7 @@
 
 <h:head>
     <title>Recuperar Acesso - BizuInfo</title>
+
     <h:outputStylesheet library="css" name="estilo.css"/>
 </h:head>
 
@@ -12,7 +13,8 @@
 
     <h:form id="formRecuperar">
 
-        <p:panel header="Recuperar Acesso" styleClass="card">
+        <p:panel header="Recuperar Acesso"
+                 styleClass="card">
 
             <p:messages id="mensagens" closable="true">
                 <p:autoUpdate/>
@@ -23,13 +25,17 @@
                          cellpadding="7">
 
                 <h:outputText
-                        value="Informe seu email para receber o link de recuperação." />
+                        value="Informe seu email para receber o link de recuperação."/>
 
                 <p:inputText
                         value="#{recuperarAcessoBean.email}"
                         placeholder="Digite seu email"
                         required="true"
-                        styleClass="full-width" />
+                        styleClass="full-width"/>
+
+                <p:poll interval="1"
+                        process="@this"
+                        update=":formRecuperar:painelBotao" />
 
                 <h:panelGroup id="painelBotao"
                               layout="block"
@@ -40,31 +46,37 @@
                             value="Enviar link"
                             icon="pi pi-send"
                             action="#{recuperarAcessoBean.enviarLink}"
-                            update="mensagens painelBotao"
+                            update=":formRecuperar:mensagens :formRecuperar:painelBotao"
                             rendered="#{!recuperarAcessoBean.linkEnviado}"
                             disabled="#{recuperarAcessoBean.contadorAtivo}"
-                            styleClass="full-width p-mt-2" />
+                            styleClass="full-width p-mt-2"/>
 
                     <p:commandButton
                             id="btnReenviar"
                             value="Reenviar link"
                             icon="pi pi-refresh"
                             action="#{recuperarAcessoBean.reenviarLink}"
-                            update="mensagens painelBotao"
+                            update=":formRecuperar:mensagens :formRecuperar:painelBotao"
                             rendered="#{recuperarAcessoBean.linkEnviado}"
                             disabled="#{recuperarAcessoBean.contadorAtivo}"
-                            styleClass="full-width p-mt-2" />
+                            styleClass="full-width p-mt-2"/>
 
-                    <h:outputText
+                    <h:panelGroup
                             rendered="#{recuperarAcessoBean.contadorAtivo}"
-                            value="Aguarde #{recuperarAcessoBean.segundosRestantes}s"
-                            style="display:block; margin-top:10px; text-align:center;" />
+                            layout="block"
+                            style="margin-top:10px; text-align:center;">
+
+                        <h:outputText
+                                value="Aguarde #{recuperarAcessoBean.segundosRestantes}s"
+                                styleClass="texto-info"/>
+
+                    </h:panelGroup>
 
                 </h:panelGroup>
 
             </h:panelGrid>
 
-            <p:divider />
+            <p:divider/>
 
             <h:link
                     value="Retornar para Login"
