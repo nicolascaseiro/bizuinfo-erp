@@ -10,7 +10,7 @@ import jakarta.inject.Inject;
 import java.util.Optional;
 
 @RequestScoped
-public class ConsumirTokenService {
+public class ConsumirTokenConfirmacaoService {
 
     @Inject
     private UsuarioDAO usuarioDAO;

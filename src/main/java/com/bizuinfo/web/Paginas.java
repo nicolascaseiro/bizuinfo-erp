@@ -20,7 +20,8 @@ public class Paginas {
     public static final String CADASTRO = PUBLICO + ACESSO + "cadastro.xhtml";
     public static final String RECUPERAR_ACESSO = PUBLICO + ACESSO + "recuperar_acesso.xhtml";
     public static final String CONFIRMAR_EMAIL = PUBLICO + ACESSO + "confirmar_email.xhtml";
-    public static final String CONSUMIR_TOKEN = PUBLICO + ACESSO + "consumir_token.xhtml";
+    public static final String CONSUMIR_TOKEN_CONFIRMACAO = PUBLICO + ACESSO + "consumir_token_confirmacao.xhtml";
+    public static final String CONSUMIR_TOKEN_RECUPERACAO = PUBLICO + ACESSO + "consumir_token_recuperacao.xhtml";
 
     // Páginas restritas
     public static final String DASHBOARD = RESTRITO + APP + FUNCIONARIO + "dashboard.xhtml";

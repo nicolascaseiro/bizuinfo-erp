@@ -4,6 +4,7 @@ import com.bizuinfo.acesso.model.TipoToken;
 import com.bizuinfo.infra.service.EmailService;
 import com.bizuinfo.usuario.dao.UsuarioDAO;
 import com.bizuinfo.usuario.model.Usuario;
+import com.bizuinfo.web.Paginas;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -42,7 +43,7 @@ public class ConfirmarEmailService {
 
         String link = "http://localhost:8080/"
                     + "bizuinfo_erp_war_exploded/"
-                    + "publico/acesso/consumir_token.xhtml?token="
+                    + Paginas.CONSUMIR_TOKEN_CONFIRMACAO + "?token="
                     + usuario.getTokenVerificacao();
 
         String text = "Clique no link para confirmar seu email da conta BizuInfo:<br><br>"

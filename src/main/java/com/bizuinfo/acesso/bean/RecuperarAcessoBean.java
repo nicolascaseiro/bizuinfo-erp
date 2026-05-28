@@ -57,20 +57,18 @@ public class RecuperarAcessoBean implements Serializable {
         recuperarAcessoService.enviarLink(email);
 
         FacesContext.getCurrentInstance().addMessage(
-                null,
-                new FacesMessage(
-                        FacesMessage.SEVERITY_INFO,
-                        "Link reenviado",
-                        "Verifique sua caixa de entrada."
-                )
+            null,
+            new FacesMessage(
+                FacesMessage.SEVERITY_INFO,
+                "Link reenviado",
+                "Verifique sua caixa de entrada."
+            )
         );
     }
 
     public int getSegundosRestantes() {
 
-        long restante =
-                INTERVALO - (System.currentTimeMillis() - ultimoReenvio);
-
+        long restante = INTERVALO - (System.currentTimeMillis() - ultimoReenvio);
         return Math.max(0, (int) (restante / 1000));
     }
 

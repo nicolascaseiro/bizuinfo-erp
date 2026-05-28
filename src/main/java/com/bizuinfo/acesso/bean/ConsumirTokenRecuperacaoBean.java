@@ -1,22 +1,20 @@
 package com.bizuinfo.acesso.bean;
 
-import com.bizuinfo.acesso.service.ConsumirTokenService;
+import com.bizuinfo.acesso.service.ConsumirTokenConfirmacaoService;
+import com.bizuinfo.acesso.service.ConsumirTokenRecuperacaoService;
 import com.bizuinfo.usuario.model.Usuario;
 import com.bizuinfo.web.Paginas;
-
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-import java.io.Serializable;
-
 @Named
 @RequestScoped
-public class ConsumirTokenBean implements Serializable {
+public class ConsumirTokenRecuperacaoBean {
 
     @Inject
-    private ConsumirTokenService consumirTokenService;
+    private ConsumirTokenRecuperacaoService consumirTokenService;
 
     private String token;
 
