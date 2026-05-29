@@ -1,5 +1,6 @@
 package com.bizuinfo.usuario.service;
 
+import com.bizuinfo.infra.util.RequestUtil;
 import com.bizuinfo.usuario.dao.LogAuditoriaDAO;
 import com.bizuinfo.usuario.model.LogAuditoria;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -18,12 +19,17 @@ public class LogAuditoriaService {
      * @param detalhe descrição do que aconteceu
      * @param usuarioResponsavel email ou nome do usuário que executou a ação
      */
-    public void registrar(String acao, String detalhe, String usuarioResponsavel) {
+    public void registrar(String acao,
+                          String detalhe,
+                          String usuarioResponsavel) {
+
+        String ipOrigem = RequestUtil.getIpUsuario();
 
         LogAuditoria log = new LogAuditoria(
                 acao,
                 detalhe,
-                usuarioResponsavel
+                usuarioResponsavel,
+                ipOrigem
         );
 
         logAuditoriaDAO.salvar(log);

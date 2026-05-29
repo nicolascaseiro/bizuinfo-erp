@@ -67,10 +67,16 @@ CREATE TABLE IF NOT EXISTS log_auditoria (
                                              acao VARCHAR(100) NOT NULL,
                                              detalhe TEXT,
                                              data_hora DATETIME NOT NULL,
-                                             usuario_responsavel VARCHAR(100)
+                                             usuario_responsavel VARCHAR(100),
+                                             ip_origem VARCHAR(64)
 ) ENGINE=InnoDB;
 
-DELETE FROM log_auditoria WHERE id=8;
+ALTER TABLE log_auditoria
+    ADD COLUMN ip_origem VARCHAR(64);
+
+UPDATE log_auditoria
+SET ip_origem = '127.0.0.1'
+WHERE ip_origem IS NULL OR ip_origem = '';
 
 INSERT INTO usuario (nome, email, senha, role, email_verificado) VALUES
                                                                      ('Joao Paulo', 'bizuinfo.contato@gmail.com', 'admin', 'ADMIN', TRUE),
