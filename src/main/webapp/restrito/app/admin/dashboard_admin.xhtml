@@ -85,10 +85,13 @@
 
             <div class="spacer"></div>
 
-            <p:commandButton value="Sair"
-                             icon="pi pi-sign-out"
-                             ajax="false"
-                             action="#{loginBean.sair}"/>
+            <p:menuButton icon="pi pi-user" style="margin-left:auto">
+                <p:menuitem value="Meu Perfil"
+                            outcome="/restrito/app/perfil/perfil_usuario.xhtml?faces-redirect=true"/>
+                <p:menuitem value="Sair"
+                            icon="pi pi-sign-out"
+                            action="#{loginBean.sair}"/>
+            </p:menuButton>
 
         </div>
 
