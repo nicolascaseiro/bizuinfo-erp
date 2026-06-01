@@ -21,16 +21,20 @@ public class LogAuditoria {
     @Column(name = "data_hora", nullable = false)
     private LocalDateTime dataHora;
 
+    @Column(name = "ip_origem", length = 64)
+    private String ipOrigem;
+
     private String usuarioResponsavel;
 
     public LogAuditoria() {
         this.dataHora = LocalDateTime.now();
     }
 
-    public LogAuditoria(String acao, String detalhe, String usuarioResponsavel) {
+    public LogAuditoria(String acao, String detalhe, String usuarioResponsavel, String ipOrigem) {
         this.acao = acao;
         this.detalhe = detalhe;
         this.usuarioResponsavel = usuarioResponsavel;
+        this.ipOrigem = ipOrigem;
         this.dataHora = LocalDateTime.now();
     }
 
@@ -45,7 +49,8 @@ public class LogAuditoria {
     public void setDataHora(LocalDateTime dataHora) { this.dataHora = dataHora; }
     public String getUsuarioResponsavel() { return usuarioResponsavel; }
     public void setUsuarioResponsavel(String usuarioResponsavel) { this.usuarioResponsavel = usuarioResponsavel; }
-
+    public String getIpOrigem() { return ipOrigem; }
+    public void setIpOrigem(String ipOrigem) { this.ipOrigem = ipOrigem; }
     public String getDataHoraFormatada() {
         if (dataHora == null) {
             return "";

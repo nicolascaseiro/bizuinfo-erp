@@ -2,6 +2,7 @@ package com.bizuinfo.acesso.bean;
 
 import com.bizuinfo.acesso.service.LoginService;
 import com.bizuinfo.usuario.model.Usuario;
+import com.bizuinfo.usuario.service.LogAuditoriaService;
 import com.bizuinfo.web.Paginas;
 import com.bizuinfo.acesso.dto.LoginResultado;
 
@@ -86,13 +87,31 @@ public class LoginBean implements Serializable {
         return null;
     }
 
+    @Inject
+    private LogAuditoriaService logAuditoriaService;
+
+    @Inject
+    private SessaoBean sessaoBean;
+
     public String sair() {
+
+        Usuario usuario = usuarioLogado;
+
+        if (usuario != null) {
+
+            logAuditoriaService.registrar(
+                    "LOGOUT",
+                    "Usuário saiu do sistema",
+                    usuario.getNome()
+            );
+        }
+
+        usuarioLogado = null;
+        sessaoBean.logout();
 
         FacesContext.getCurrentInstance()
                 .getExternalContext()
                 .invalidateSession();
-
-        usuarioLogado = null;
 
         return Paginas.LOGIN + "?faces-redirect=true";
     }

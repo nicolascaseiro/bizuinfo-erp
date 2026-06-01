@@ -11,6 +11,8 @@ public class Paginas {
     private static final String GERENTE = "gerente/";
     private static final String ADMIN = "admin/";
 
+    private static final String PERFIL = "perfil/";
+
     // Módulo
     private static final String ACESSO = "acesso/";
     private static final String APP = "app/";
@@ -27,6 +29,7 @@ public class Paginas {
     public static final String DASHBOARD = RESTRITO + APP + FUNCIONARIO + "dashboard.xhtml";
     public static final String DASHBOARD_GERENTE = RESTRITO + APP + GERENTE +  "dashboard_gerente.xhtml";
     public static final String DASHBOARD_ADMIN = RESTRITO + APP + ADMIN + "dashboard_admin.xhtml";
+    public static final String PERFIL_USUARIO = RESTRITO + APP + PERFIL + "perfil_usuario.xhtml";
 
     // Outras
     public static final String ACESSO_NEGADO = PUBLICO + "acesso_negado.xhtml";
