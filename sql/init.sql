@@ -70,8 +70,6 @@ CREATE TABLE IF NOT EXISTS log_auditoria (
                                              usuario_responsavel VARCHAR(100)
 ) ENGINE=InnoDB;
 
-DELETE FROM log_auditoria WHERE id=8;
-
 INSERT INTO usuario (nome, email, senha, role, email_verificado) VALUES
                                                                      ('Joao Paulo', 'bizuinfo.contato@gmail.com', 'admin', 'ADMIN', TRUE),
                                                                      ('Miguel Fernandes', '', 'admin', 'FUNCIONARIO', TRUE),
@@ -140,7 +138,6 @@ INSERT INTO produto (nome, preco, estoqueAtual, descricao, fornecedor_idforneced
                                                                                                                 ('Fonte ATX 750W 80 Plus Gold', 650.00, 25, 'Modular', 4, 2),
                                                                                                                 ('Volante G29 Driving Force', 1800.00, 8, 'Com Pedais', 1, 1),
                                                                                                                 ('Caixa de Som Z906', 2200.00, 4, 'Surround 5.1 1000W', 1, 4);
-/*
 SET GLOBAL event_scheduler = ON;
 DELIMITER $$
 CREATE EVENT IF NOT EXISTS limpar_usuarios_pendentes
@@ -154,5 +151,3 @@ CREATE EVENT IF NOT EXISTS limpar_usuarios_pendentes
           AND token_expiracao < NOW();
     END$$
 DELIMITER ;
-
- */
