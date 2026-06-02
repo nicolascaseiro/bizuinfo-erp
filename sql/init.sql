@@ -67,21 +67,13 @@ CREATE TABLE IF NOT EXISTS log_auditoria (
                                              acao VARCHAR(100) NOT NULL,
                                              detalhe TEXT,
                                              data_hora DATETIME NOT NULL,
-                                             usuario_responsavel VARCHAR(100),
-                                             ip_origem VARCHAR(64)
+                                             usuario_responsavel VARCHAR(100)
 ) ENGINE=InnoDB;
 
-
-
-UPDATE log_auditoria
-SET ip_origem = '127.0.0.1'
-WHERE ip_origem IS NULL OR ip_origem = '';
-
 INSERT INTO usuario (nome, email, senha, role, email_verificado) VALUES
-                                                                     ('Joao Paulo', 'bizuinfo.contato@gmail.com', '', 'ADMIN', TRUE),
-                                                                     ('Miguel Fernandes', 'miguel.rspp@gmail.com', '', 'FUNCIONARIO', TRUE),
-                                                                     ('Nicolas Caseiro', 'nickda@gmail.com', '', 'GERENTE', TRUE),
-                                                                     ('Apagar', '202320637211@uezo.edu.br', '', 'FUNCIONARIO', TRUE),
+                                                                     ('Joao Paulo', 'bizuinfo.contato@gmail.com', 'admin', 'ADMIN', TRUE),
+                                                                     ('Miguel Fernandes', '', 'admin', 'FUNCIONARIO', TRUE),
+                                                                     ('Nicolas Caseiro', 'nickda@gmail.com', 'admin', 'GERENTE', TRUE),
                                                                      ('Teste','teste@gmail.com','$2a$10$z/eXQYdYSLo7R4NVNPwZ9uFvDNn/bM2P9ulTgYP3MaGyPrCwDvRQ.','ADMIN',TRUE);
 
 INSERT INTO tipousuario (descricao, usuario_id) VALUES
@@ -146,7 +138,6 @@ INSERT INTO produto (nome, preco, estoqueAtual, descricao, fornecedor_idforneced
                                                                                                                 ('Fonte ATX 750W 80 Plus Gold', 650.00, 25, 'Modular', 4, 2),
                                                                                                                 ('Volante G29 Driving Force', 1800.00, 8, 'Com Pedais', 1, 1),
                                                                                                                 ('Caixa de Som Z906', 2200.00, 4, 'Surround 5.1 1000W', 1, 4);
-/*
 SET GLOBAL event_scheduler = ON;
 DELIMITER $$
 CREATE EVENT IF NOT EXISTS limpar_usuarios_pendentes
@@ -160,4 +151,3 @@ CREATE EVENT IF NOT EXISTS limpar_usuarios_pendentes
           AND token_expiracao < NOW();
     END$$
 DELIMITER ;
-*/
