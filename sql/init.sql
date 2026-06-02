@@ -74,6 +74,8 @@ INSERT INTO usuario (nome, email, senha, role, email_verificado) VALUES
                                                                      ('Joao Paulo', 'bizuinfo.contato@gmail.com', 'admin', 'ADMIN', TRUE),
                                                                      ('Miguel Fernandes', '', 'admin', 'FUNCIONARIO', TRUE),
                                                                      ('Nicolas Caseiro', 'nickda@gmail.com', 'admin', 'GERENTE', TRUE),
+                                                                     ('Apagar', 'davi.colosso50@gmail.com', 'admin', 'FUNCIONARIO', TRUE),
+                                                                     ('Apagar2', 'miguel.control19@gmail.com', 'admin', 'FUNCIONARIO', FALSE),
                                                                      ('Teste','teste@gmail.com','$2a$10$z/eXQYdYSLo7R4NVNPwZ9uFvDNn/bM2P9ulTgYP3MaGyPrCwDvRQ.','ADMIN',TRUE);
 
 INSERT INTO tipousuario (descricao, usuario_id) VALUES
