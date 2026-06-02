@@ -7,13 +7,84 @@
     <title>Dashboard - BizuInfo</title>
 
     <h:outputStylesheet library="css" name="estilo.css"/>
+
+    <style>
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .topbar {
+            flex: 0 0 auto;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: #ffffff;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .spacer {
+            flex: 1;
+        }
+
+        .status-ativo {
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-inativo {
+            color: red;
+            font-weight: bold;
+        }
+
+        .content-area {
+            padding: 15px;
+        }
+
+        .table-container {
+            max-height: 65vh;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+    </style>
+
 </h:head>
 
 <h:body>
 
     <h:form id="formDashboard">
 
-        <p:panel header="ERP BizuInfo"
+        <div class="topbar">
+
+            <h:outputText value="ERP BizuInfo"
+                          style="font-size:18px;font-weight:bold;" />
+
+            <div class="spacer"></div>
+
+            <p:menuButton icon="pi pi-user" style="margin-left:auto">
+
+                <p:menuitem value="Meu Perfil"
+                            outcome="/restrito/app/perfil/perfil_usuario.xhtml?faces-redirect=true"/>
+
+                <p:menuitem value="Sair"
+                            icon="pi pi-sign-out"
+                            action="#{loginBean.sair}"/>
+
+            </p:menuButton>
+
+        </div>
+
+        <p:panel header="Dashboard Funcionário"
                  styleClass="card-cadastro">
 
             <h:panelGrid columns="1"
@@ -27,18 +98,13 @@
                 <p:divider />
 
                 <h:outputText
-                        value="Email: #{loginBean.email}" />
+                        value="Nome: #{loginBean.usuarioLogado.nome}" />
 
-                <!-- REMOVER depois -->
                 <h:outputText
-                        value="Senha: #{loginBean.senha}" />
+                        value="Email: #{loginBean.usuarioLogado.email}" />
 
-                <p:commandButton
-                        value="Sair"
-                        icon="pi pi-sign-out"
-                        ajax="false"
-                        action="#{loginBean.sair}"
-                        styleClass="full-width p-mt-2" />
+                <h:outputText
+                        value="Perfil: #{loginBean.usuarioLogado.role}" />
 
             </h:panelGrid>
 
