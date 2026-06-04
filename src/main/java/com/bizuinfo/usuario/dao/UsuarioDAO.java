@@ -72,4 +72,37 @@ public class UsuarioDAO extends GenericoDAO<Usuario> {
 
         }
     }
+
+    @Override
+    public void remover(Long id) {
+
+        EntityManager em = JPAutil.getEntityManager();
+
+        try {
+            em.getTransaction().begin();
+
+            // 1. EXCLUI AS COMPRAS PRIMEIRO (Bypass no bug de parâmetros do JPA)
+            em.createNativeQuery("DELETE FROM compra WHERE usuario_id = " + id)
+                    .executeUpdate();
+
+            // 2. EXCLUI O USUÁRIO
+            Usuario ref = em.getReference(Usuario.class, id);
+            em.remove(ref);
+
+            em.flush();
+
+            em.getTransaction().commit();
+
+        } catch (Exception e) {
+
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+
+            throw new RuntimeException("Erro ao excluir usuário: " + e.getMessage(), e);
+
+        } finally {
+            em.close();
+        }
+    }
 }
