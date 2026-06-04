@@ -1,19 +1,18 @@
 package com.bizuinfo.acesso.bean;
 
-import com.bizuinfo.acesso.service.ConsumirTokenConfirmacaoService;
 import com.bizuinfo.acesso.service.ConsumirTokenRecuperacaoService;
 import com.bizuinfo.usuario.model.Usuario;
 import com.bizuinfo.web.Paginas;
+import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 @Named
 @RequestScoped
 public class ConsumirTokenRecuperacaoBean {
 
-    @Inject
+    @EJB
     private ConsumirTokenRecuperacaoService consumirTokenService;
 
     private String token;

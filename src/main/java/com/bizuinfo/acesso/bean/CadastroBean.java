@@ -3,6 +3,7 @@ package com.bizuinfo.acesso.bean;
 import com.bizuinfo.usuario.service.UsuarioService;
 import com.bizuinfo.web.Paginas;
 
+import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -26,7 +27,7 @@ public class CadastroBean implements Serializable {
     @Inject
     private ConfirmarEmailBean confirmarEmailBean;
 
-    @Inject
+    @EJB
     private UsuarioService usuarioService;
 
     public String cadastrar() {

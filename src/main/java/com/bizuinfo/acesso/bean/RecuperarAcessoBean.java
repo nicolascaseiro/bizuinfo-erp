@@ -1,11 +1,10 @@
 package com.bizuinfo.acesso.bean;
 
 import com.bizuinfo.acesso.service.RecuperarAcessoService;
-
+import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serial;
@@ -25,7 +24,7 @@ public class RecuperarAcessoBean implements Serializable {
     private long ultimoReenvio = 0;
     private static final long INTERVALO = 30000;
 
-    @Inject
+    @EJB
     private RecuperarAcessoService recuperarAcessoService;
 
     public void enviarLink() {

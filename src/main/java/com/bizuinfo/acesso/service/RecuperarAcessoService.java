@@ -6,6 +6,7 @@ import com.bizuinfo.usuario.dao.UsuarioDAO;
 import com.bizuinfo.usuario.model.Usuario;
 
 import com.bizuinfo.web.Paginas;
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 
@@ -17,10 +18,10 @@ public class RecuperarAcessoService {
     @Inject
     private UsuarioDAO usuarioDAO;
 
-    @Inject
+    @EJB
     private LinkMagicoService linkMagicoService;
 
-    @Inject
+    @EJB
     private EmailService emailService;
 
     public void enviarLink(String email) {
