@@ -71,9 +71,11 @@ CREATE TABLE IF NOT EXISTS log_auditoria (
 ) ENGINE=InnoDB;
 
 INSERT INTO usuario (nome, email, senha, role, email_verificado) VALUES
-                                                                     ('Joao Paulo', 'bizuinfo.contato@gmail.com', 'admin', 'ADMIN', TRUE),
-                                                                     ('Miguel Fernandes', '', 'admin', 'FUNCIONARIO', TRUE),
-                                                                     ('Nicolas Caseiro', 'nickda@gmail.com', 'admin', 'GERENTE', TRUE),
+                                                                     ('Joao Paulo', 'bizuinfo.contato@gmail.com', '$2a$12$7RBVdohjJCyADskdJTDmmOa6MOUNcOBrNH3', 'ADMIN', TRUE),
+                                                                     ('Miguel Fernandes', 'miguel.rspp@gmail.com', '$2a$12$7RBVdohjJCyADskdJTDmmOa6MOUNcOBrNH3..AS/SZAwoUpNFU086', 'FUNCIONARIO', TRUE),
+                                                                     ('Nicolas Caseiro', 'nickda@gmail.com', '$2a$12$7RBVdohjJCyADskdJTDmmOa6MOUNcOBrNH3', 'GERENTE', TRUE),
+                                                                     ('Apagar', 'davi.colosso50@gmail.com', '$2a$12$7RBVdohjJCyADskdJTDmmOa6MOUNcOBrNH3', 'FUNCIONARIO', TRUE),
+                                                                     ('Apagar2', 'miguel.control19@gmail.com', '$2a$12$7RBVdohjJCyADskdJTDmmOa6MOUNcOBrNH3', 'FUNCIONARIO', FALSE),
                                                                      ('Teste','teste@gmail.com','$2a$10$z/eXQYdYSLo7R4NVNPwZ9uFvDNn/bM2P9ulTgYP3MaGyPrCwDvRQ.','ADMIN',TRUE);
 
 INSERT INTO tipousuario (descricao, usuario_id) VALUES
