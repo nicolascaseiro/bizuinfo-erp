@@ -5,6 +5,7 @@ import com.bizuinfo.usuario.model.Usuario;
 import com.bizuinfo.usuario.service.LogAuditoriaService;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
@@ -26,7 +27,7 @@ public class PerfilBean implements Serializable {
     @Inject
     private UsuarioDAO usuarioDAO;
 
-    @Inject
+    @EJB
     private LogAuditoriaService logAuditoriaService;
 
     private Usuario usuario;

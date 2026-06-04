@@ -4,18 +4,17 @@ import com.bizuinfo.usuario.dao.UsuarioDAO;
 import com.bizuinfo.usuario.model.Role;
 import com.bizuinfo.usuario.model.Usuario;
 import com.bizuinfo.usuario.service.LogAuditoriaService;
-
+import jakarta.ejb.EJB;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.primefaces.event.RowEditEvent;
 
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
-
-import org.primefaces.event.RowEditEvent;
 
 @Named
 @ViewScoped
@@ -24,7 +23,7 @@ public class UsuarioAdminBean implements Serializable {
     @Inject
     private UsuarioDAO usuarioDAO;
 
-    @Inject
+    @EJB
     private LogAuditoriaService logAuditoriaService;
 
     @Inject

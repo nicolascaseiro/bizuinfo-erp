@@ -1,11 +1,11 @@
 package com.bizuinfo.acesso.bean;
 
+import com.bizuinfo.acesso.dto.LoginResultado;
 import com.bizuinfo.acesso.service.LoginService;
 import com.bizuinfo.usuario.model.Usuario;
 import com.bizuinfo.usuario.service.LogAuditoriaService;
 import com.bizuinfo.web.Paginas;
-import com.bizuinfo.acesso.dto.LoginResultado;
-
+import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -27,7 +27,7 @@ public class LoginBean implements Serializable {
 
     private Usuario usuarioLogado;
 
-    @Inject
+    @EJB
     private LoginService loginService;
 
     public String entrar() {
@@ -87,7 +87,7 @@ public class LoginBean implements Serializable {
         return null;
     }
 
-    @Inject
+    @EJB
     private LogAuditoriaService logAuditoriaService;
 
     @Inject

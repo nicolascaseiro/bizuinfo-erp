@@ -1,13 +1,11 @@
 package com.bizuinfo.acesso.bean;
 
-import com.bizuinfo.acesso.model.TipoToken;
 import com.bizuinfo.acesso.service.ConsumirTokenConfirmacaoService;
 import com.bizuinfo.usuario.model.Usuario;
 import com.bizuinfo.web.Paginas;
-
+import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
@@ -16,7 +14,7 @@ import java.io.Serializable;
 @RequestScoped
 public class ConsumirTokenConfirmacaoBean implements Serializable {
 
-    @Inject
+    @EJB
     private ConsumirTokenConfirmacaoService consumirTokenService;
 
     private String token;
