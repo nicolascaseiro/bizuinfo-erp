@@ -4,55 +4,137 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>Gerenciar Categorias</title>
+    <title>Gerenciar Categorias - BizuInfo ERP</title>
 
-    <h:outputStylesheet library="css"
-                        name="estilo.css"/>
+    <meta charset="UTF-8"/>
+
+    <h:outputStylesheet library="css" name="estilo.css"/>
+
+    <style>
+
+        html, body {
+            display: block !important;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            height: auto;
+        }
+
+        .container-tabela {
+            margin-top: 20px;
+            padding: 20px;
+        }
+
+        .topbar {
+            flex: 0 0 auto;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: #ffffff;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .spacer {
+            flex: 1;
+        }
+
+    </style>
+
 </h:head>
 
 <h:body>
 
     <h:form id="formCategorias">
 
-        <p:panel header="Gestão de Categorias"
-                 styleClass="card">
+        <p:growl id="growl" showDetail="true"/>
 
-            <p:commandButton
-                    value="Nova Categoria"
-                    icon="pi pi-plus"
-                    type="button"
-                    styleClass="p-mb-3"/>
+        <div class="topbar">
 
-            <p:dataTable value="#{categoriaBean.categorias}"
-                         var="c"
-                         emptyMessage="Nenhuma categoria cadastrada">
+            <p:button value="Dashboard"
+                      icon="pi pi-home"
+                      outcome="/restrito/app/admin/dashboard_admin.xhtml"/>
 
-                <p:column headerText="ID">
-                    <h:outputText value="#{c.id}"/>
-                </p:column>
+            <p:menuButton value="Produtos"
+                          icon="pi pi-box">
 
-                <p:column headerText="Nome">
-                    <h:outputText value="#{c.nome}"/>
-                </p:column>
+                <p:menuitem value="Gerenciar Produtos"
+                            outcome="/restrito/app/produto/gerenciar_produtos.xhtml"/>
 
-                <p:column headerText="Ações"
-                          style="width:180px">
+                <p:menuitem value="Gerenciar Categorias"
+                            outcome="/restrito/app/produto/gerenciar_categorias.xhtml"/>
 
-                    <p:commandButton
-                            value="Editar"
-                            icon="pi pi-pencil"
-                            type="button"/>
+                <p:menuitem value="Gerenciar Estoque"
+                            outcome="/restrito/app/produto/gerenciar_estoque.xhtml"/>
 
-                    <p:spacer width="5"/>
+            </p:menuButton>
 
-                    <p:commandButton
-                            value="Excluir"
-                            icon="pi pi-trash"
-                            type="button"/>
+            <div class="spacer"></div>
 
-                </p:column>
+            <p:menuButton icon="pi pi-user">
 
-            </p:dataTable>
+                <p:menuitem value="Meu Perfil"
+                            outcome="/restrito/app/perfil/perfil_usuario.xhtml?faces-redirect=true"/>
+
+                <p:menuitem value="Sair"
+                            icon="pi pi-sign-out"
+                            action="#{loginBean.sair}"/>
+
+            </p:menuButton>
+
+        </div>
+
+        <p:panel header="Gestão de Categorias">
+
+            <div class="container-tabela">
+
+                <p:commandButton value="Nova Categoria"
+                                 icon="pi pi-plus"
+                                 type="button"
+                                 styleClass="p-mb-3"/>
+
+                <p:dataTable value="#{categoriaBean.categorias}"
+                             var="c"
+                             emptyMessage="Nenhuma categoria cadastrada">
+
+                    <p:column headerText="ID"
+                              width="80"
+                              style="text-align:center">
+
+                        <h:outputText value="#{c.id}"/>
+
+                    </p:column>
+
+                    <p:column headerText="Nome">
+
+                        <h:outputText value="#{c.nome}"/>
+
+                    </p:column>
+
+                    <p:column headerText="Ações"
+                              width="220"
+                              style="text-align:center">
+
+                        <p:commandButton value="Editar"
+                                         icon="pi pi-pencil"
+                                         type="button"/>
+
+                        <p:spacer width="5"/>
+
+                        <p:commandButton value="Excluir"
+                                         icon="pi pi-trash"
+                                         type="button"/>
+
+                    </p:column>
+
+                </p:dataTable>
+
+            </div>
 
         </p:panel>
 
