@@ -209,7 +209,7 @@ public class PerfilBean implements Serializable {
 
             case ADMIN -> ctx + "/restrito/app/admin/dashboard_admin.xhtml";
 
-            case GERENTE -> ctx + "/restrito/app/gerente/dashboard.xhtml";
+            case GERENTE -> ctx + "/restrito/app/gerente/dashboard_gerente.xhtml";
 
             default -> ctx + "/restrito/app/funcionario/dashboard.xhtml";
         };
