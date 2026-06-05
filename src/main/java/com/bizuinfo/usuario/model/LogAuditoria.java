@@ -21,7 +21,7 @@ public class LogAuditoria {
     @Column(name = "data_hora", nullable = false)
     private LocalDateTime dataHora;
 
-    @Column(name = "ip_origem", length = 64)
+    @Column(name = "ip_origem", length = 100)
     private String ipOrigem;
 
     private String usuarioResponsavel;

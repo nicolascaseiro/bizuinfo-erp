@@ -94,18 +94,19 @@ CREATE TABLE IF NOT EXISTS log_auditoria
     acao                VARCHAR(100) NOT NULL,
     detalhe             TEXT,
     data_hora           DATETIME     NOT NULL,
-    usuario_responsavel VARCHAR(100)
+    usuario_responsavel VARCHAR(100),
+    ip_origem VARCHAR(100)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci;
 
 INSERT INTO usuario (nome, email, senha, role, email_verificado)
-VALUES ('Joao Paulo', 'bizuinfo.contato@gmail.com', '$2a$12$7RBVdohjJCyADskdJTDmmOa6MOUNcOBrNH3', 'ADMIN', TRUE),
+VALUES ('Joao Paulo', 'bizuinfo.contato@gmail.com', '$2a$12$7RBVdohjJCyADskdJTDmmOa6MOUNcOBrNH3..AS/SZAwoUpNFU086', 'ADMIN', TRUE),
        ('Miguel Fernandes', 'miguel.rspp@gmail.com', '$2a$12$7RBVdohjJCyADskdJTDmmOa6MOUNcOBrNH3..AS/SZAwoUpNFU086',
         'FUNCIONARIO', TRUE),
-       ('Nicolas Caseiro', 'nickda@gmail.com', '$2a$12$7RBVdohjJCyADskdJTDmmOa6MOUNcOBrNH3', 'GERENTE', TRUE),
-       ('Apagar', 'davi.colosso50@gmail.com', '$2a$12$7RBVdohjJCyADskdJTDmmOa6MOUNcOBrNH3', 'FUNCIONARIO', TRUE),
-       ('Apagar2', 'miguel.control19@gmail.com', '$2a$12$7RBVdohjJCyADskdJTDmmOa6MOUNcOBrNH3', 'FUNCIONARIO', FALSE),
+       ('Nicolas Caseiro', 'nicolascaseirodeabreu@gmail.com', '$2a$12$7RBVdohjJCyADskdJTDmmOa6MOUNcOBrNH3..AS/SZAwoUpNFU086', 'GERENTE', TRUE),
+       ('Apagar', 'davi.colosso50@gmail.com', '$2a$12$7RBVdohjJCyADskdJTDmmOa6MOUNcOBrNH3..AS/SZAwoUpNFU086', 'FUNCIONARIO', TRUE),
+       ('Apagar2', 'miguel.control19@gmail.com', '$2a$12$7RBVdohjJCyADskdJTDmmOa6MOUNcOBrNH3..AS/SZAwoUpNFU086', 'FUNCIONARIO', FALSE),
        ('Teste', 'teste@gmail.com', '$2a$10$z/eXQYdYSLo7R4NVNPwZ9uFvDNn/bM2P9ulTgYP3MaGyPrCwDvRQ.', 'ADMIN', TRUE);
 
 INSERT INTO tipousuario (descricao, usuario_id)
