@@ -4,7 +4,8 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>Dashboard - BizuInfo</title>
+
+    <title>Dashboard Funcionário - BizuInfo</title>
 
     <h:outputStylesheet library="css" name="estilo.css"/>
 
@@ -35,25 +36,8 @@
             flex: 1;
         }
 
-        .status-ativo {
-            color: green;
-            font-weight: bold;
-        }
-
-        .status-inativo {
-            color: red;
-            font-weight: bold;
-        }
-
         .content-area {
             padding: 15px;
-        }
-
-        .table-container {
-            max-height: 65vh;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            border-radius: 6px;
         }
 
     </style>
@@ -66,12 +50,13 @@
 
         <div class="topbar">
 
-            <h:outputText value="ERP BizuInfo"
-                          style="font-size:18px;font-weight:bold;" />
+            <p:commandButton value="Dashboard"
+                             icon="pi pi-home"
+                             outcome="/restrito/app/funcionario/dashboard.xhtml"/>/>
 
             <div class="spacer"></div>
 
-            <p:menuButton icon="pi pi-user" style="margin-left:auto">
+            <p:menuButton icon="pi pi-user">
 
                 <p:menuitem value="Meu Perfil"
                             outcome="/restrito/app/perfil/perfil_usuario.xhtml?faces-redirect=true"/>
@@ -84,31 +69,27 @@
 
         </div>
 
-        <p:panel header="Dashboard Funcionário"
-                 styleClass="card-cadastro">
+        <p:outputPanel styleClass="content-area">
 
-            <h:panelGrid columns="1"
-                         styleClass="full-width"
-                         cellpadding="7">
+            <p:panel header="Resumo Geral">
 
-                <h:outputText
-                        value="Bem-vindo ao sistema!"
-                        style="font-size:18px; font-weight:bold; text-align:center;" />
+                <h:panelGrid columns="1" cellpadding="8">
 
-                <p:divider />
+                    <h:outputText
+                            value="Bem-vindo, #{loginBean.usuarioLogado.nome}"
+                            style="font-size:18px;font-weight:bold"/>
 
-                <h:outputText
-                        value="Nome: #{loginBean.usuarioLogado.nome}" />
+                    <h:outputText
+                            value="Email: #{loginBean.usuarioLogado.email}"/>
 
-                <h:outputText
-                        value="Email: #{loginBean.usuarioLogado.email}" />
+                    <h:outputText
+                            value="Perfil: #{loginBean.usuarioLogado.role}"/>
 
-                <h:outputText
-                        value="Perfil: #{loginBean.usuarioLogado.role}" />
+                </h:panelGrid>
 
-            </h:panelGrid>
+            </p:panel>
 
-        </p:panel>
+        </p:outputPanel>
 
     </h:form>
 
