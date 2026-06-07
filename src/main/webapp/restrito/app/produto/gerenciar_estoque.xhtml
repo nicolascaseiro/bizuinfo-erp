@@ -60,29 +60,62 @@
 
 
         <div class="topbar">
-            <p:button value="Dashboard"
-                      icon="pi pi-home"
-                      outcome="/restrito/app/admin/dashboard_admin.xhtml"/>
 
+            <h:panelGroup rendered="#{loginBean.usuarioLogado.roleString eq 'ADMIN'}">
 
-            <p:menuButton value="Produtos" icon="pi pi-box">
+                <p:button value="Dashboard"
+                          icon="pi pi-home"
+                          outcome="/restrito/app/admin/dashboard_admin.xhtml"/>
+
+                <p:button value="Usuários"
+                          icon="pi pi-users"
+                          outcome="/restrito/app/admin/usuarios.xhtml"/>
+
+                <p:button value="Logs"
+                          icon="pi pi-book"
+                          outcome="/restrito/app/admin/logs.xhtml"/>
+
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{loginBean.usuarioLogado.roleString eq 'GERENTE'}">
+
+                <p:button value="Dashboard"
+                          icon="pi pi-home"
+                          outcome="/restrito/app/gerente/dashboard_gerente.xhtml"/>
+
+                <p:button value="Usuários"
+                          icon="pi pi-users"
+                          outcome="/restrito/app/gerente/usuarios.xhtml"/>
+
+            </h:panelGroup>
+
+            <p:menuButton value="Produtos"
+                          icon="pi pi-box">
+
                 <p:menuitem value="Gerenciar Produtos"
                             outcome="/restrito/app/produto/gerenciar_produtos.xhtml"/>
+
                 <p:menuitem value="Gerenciar Categorias"
                             outcome="/restrito/app/produto/gerenciar_categorias.xhtml"/>
+
                 <p:menuitem value="Gerenciar Estoque"
                             outcome="/restrito/app/produto/gerenciar_estoque.xhtml"/>
+
             </p:menuButton>
 
             <div class="spacer"></div>
 
-            <p:menuButton icon="pi pi-user" style="margin-left:auto">
+            <p:menuButton icon="pi pi-user">
+
                 <p:menuitem value="Meu Perfil"
                             outcome="/restrito/app/perfil/perfil_usuario.xhtml?faces-redirect=true"/>
+
                 <p:menuitem value="Sair"
                             icon="pi pi-sign-out"
                             action="#{loginBean.sair}"/>
+
             </p:menuButton>
+
         </div>
 
         <p:panel header="Gestão de Estoque">

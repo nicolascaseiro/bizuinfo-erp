@@ -56,9 +56,33 @@
 
         <div class="topbar">
 
-            <p:button value="Dashboard"
-                      icon="pi pi-home"
-                      outcome="/restrito/app/admin/dashboard_admin.xhtml"/>
+            <h:panelGroup rendered="#{loginBean.usuarioLogado.roleString eq 'ADMIN'}">
+
+                <p:button value="Dashboard"
+                          icon="pi pi-home"
+                          outcome="/restrito/app/admin/dashboard_admin.xhtml"/>
+
+                <p:button value="Usuários"
+                          icon="pi pi-users"
+                          outcome="/restrito/app/admin/usuarios.xhtml"/>
+
+                <p:button value="Logs"
+                          icon="pi pi-book"
+                          outcome="/restrito/app/admin/logs.xhtml"/>
+
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{loginBean.usuarioLogado.roleString eq 'GERENTE'}">
+
+                <p:button value="Dashboard"
+                          icon="pi pi-home"
+                          outcome="/restrito/app/gerente/dashboard_gerente.xhtml"/>
+
+                <p:button value="Usuários"
+                          icon="pi pi-users"
+                          outcome="/restrito/app/gerente/usuarios.xhtml"/>
+
+            </h:panelGroup>
 
             <p:menuButton value="Produtos"
                           icon="pi pi-box">
