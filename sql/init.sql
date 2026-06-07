@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS produto
     estoqueMinimo           INT DEFAULT 5, -- NOVA COLUNA
     descricao               VARCHAR(45) NULL,
     fornecedor_idfornecedor INT         NOT NULL,
-    categoria_categoria_id  INT         NOT NULL,
+    categoria_categoria_id  INT         NULL,
     CONSTRAINT fk_produto_fornecedor FOREIGN KEY (fornecedor_idfornecedor) REFERENCES fornecedor (idfornecedor),
     CONSTRAINT fk_produto_categoria FOREIGN KEY (categoria_categoria_id) REFERENCES categoria (categoria_id)
 ) ENGINE = InnoDB
