@@ -29,4 +29,8 @@ public class Categoria {
     public Long getId() {
         return id;
     }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }
