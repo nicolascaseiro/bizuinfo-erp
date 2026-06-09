@@ -6,41 +6,8 @@
 <h:head>
 
     <title>Dashboard Gerente - BizuInfo</title>
-
-    <h:outputStylesheet library="css" name="estilo.css"/>
-
-    <style>
-
-        html, body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        .topbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-
-            background: #fff;
-            padding: 12px;
-
-            border-bottom: 1px solid #ddd;
-
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .spacer {
-            flex: 1;
-        }
-
-        .content-area {
-            padding: 15px;
-        }
-
-    </style>
+    <h:outputStylesheet library="css" name="global.css"/>
+    <h:outputStylesheet library="css" name="usuarios.css"/>
 
 </h:head>
 
@@ -52,7 +19,11 @@
 
             <p:button value="Dashboard"
                       icon="pi pi-home"
+<<<<<<<< HEAD:src/main/webapp/restrito/dashboard/dashboard_gerente.xhtml
                       outcome="/restrito/dashboard/dashboard_gerente.xhtml"/>
+========
+                      outcome="/restrito/app/gerente/dashboard.xhtml"/>
+>>>>>>>> bizuinfo/padawan:src/main/webapp/restrito/app/gerente/dashboard.xhtml
 
             <p:button value="Usuários"
                       icon="pi pi-users"

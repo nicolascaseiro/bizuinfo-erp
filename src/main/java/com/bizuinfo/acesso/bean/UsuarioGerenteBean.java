@@ -57,7 +57,9 @@ public class UsuarioGerenteBean implements Serializable {
         return usuariosCache;
     }
 
-    public void salvar(Usuario usuario) {
+    public void salvar(RowEditEvent<Usuario> event) {
+
+        Usuario usuario = event.getObject();
 
         try {
             if (usuario == null || usuario.getId() == null) return;
@@ -147,9 +149,17 @@ public class UsuarioGerenteBean implements Serializable {
 
         } catch (Exception e) {
             e.printStackTrace();
+
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR,
+                            "Erro ao salvar usuário: " + e.getMessage(),
+                            null
+                    )
+            );
         }
     }
-
     public void prepararExclusao(Usuario usuario) {
         if (usuario != null) {
             idUsuarioSelecionado = usuario.getId();
@@ -201,6 +211,15 @@ public class UsuarioGerenteBean implements Serializable {
 
         } catch (Exception e) {
             e.printStackTrace();
+
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR,
+                            "Erro ao excluir usuário: " + e.getMessage(),
+                            null
+                    )
+            );
         }
     }
 }
