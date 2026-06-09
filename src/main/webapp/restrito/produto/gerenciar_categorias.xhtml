@@ -58,28 +58,28 @@
 
             <p:button value="Dashboard"
                       icon="pi pi-home"
-                      outcome="/restrito/app/admin/dashboard_admin.xhtml"/>
+                      outcome="/restrito/dashboard/dashboard_admin.xhtml"/>
 
             <p:menuButton value="Produtos"
                           icon="pi pi-box">
 
-                <p:menuitem value="Gerenciar Produtos"
-                            outcome="/restrito/app/produto/gerenciar_produtos.xhtml"/>
+                <p:menuitem value="Consultar Estoque"
+                            outcome="/restrito/estoque/consultar_estoque.xhtml"/>
 
                 <p:menuitem value="Gerenciar Categorias"
-                            outcome="/restrito/app/produto/gerenciar_categorias.xhtml"/>
+                            outcome="/restrito/produto/gerenciar_categorias.xhtml"/>
 
                 <p:menuitem value="Gerenciar Estoque"
-                            outcome="/restrito/app/produto/gerenciar_estoque.xhtml"/>
+                            outcome="/restrito/estoque/gerenciar_estoque.xhtml"/>
 
             </p:menuButton>
 
-            <div class="spacer"></div>
+            <div class="spacer"> </div>
 
             <p:menuButton icon="pi pi-user">
 
                 <p:menuitem value="Meu Perfil"
-                            outcome="/restrito/app/perfil/perfil_usuario.xhtml?faces-redirect=true"/>
+                            outcome="/restrito/usuario/perfil_usuario.xhtml"/>
 
                 <p:menuitem value="Sair"
                             icon="pi pi-sign-out"

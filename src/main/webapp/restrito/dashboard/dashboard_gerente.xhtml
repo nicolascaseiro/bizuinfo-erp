@@ -5,7 +5,7 @@
 
 <h:head>
 
-    <title>Dashboard Admin - BizuInfo</title>
+    <title>Dashboard Gerente - BizuInfo</title>
 
     <h:outputStylesheet library="css" name="estilo.css"/>
 
@@ -18,13 +18,13 @@
         }
 
         .topbar {
-            flex: 0 0 auto;
             position: sticky;
             top: 0;
             z-index: 1000;
 
-            background: #ffffff;
+            background: #fff;
             padding: 12px;
+
             border-bottom: 1px solid #ddd;
 
             display: flex;
@@ -46,33 +46,29 @@
 
 <h:body>
 
-    <h:form id="formDashboard">
+    <h:form>
 
         <div class="topbar">
 
             <p:button value="Dashboard"
                       icon="pi pi-home"
-                      outcome="/restrito/app/admin/dashboard_admin.xhtml"/>
+                      outcome="/restrito/dashboard/dashboard_gerente.xhtml"/>
 
             <p:button value="Usuários"
                       icon="pi pi-users"
-                      outcome="/restrito/app/admin/usuarios.xhtml"/>
-
-            <p:button value="Logs"
-                      icon="pi pi-book"
-                      outcome="/restrito/app/admin/logs.xhtml"/>
+                      outcome="/restrito/usuario/usuarios_gerente.xhtml"/>
 
             <p:menuButton value="Produtos"
                           icon="pi pi-box">
 
-                <p:menuitem value="Gerenciar Produtos"
-                            outcome="/restrito/app/produto/gerenciar_produtos.xhtml"/>
+                <p:menuitem value="Consultar Estoque"
+                            outcome="/restrito/estoque/consultar_estoque.xhtml"/>
 
                 <p:menuitem value="Gerenciar Categorias"
-                            outcome="/restrito/app/produto/gerenciar_categorias.xhtml"/>
+                            outcome="/restrito/produto/gerenciar_categorias.xhtml"/>
 
                 <p:menuitem value="Gerenciar Estoque"
-                            outcome="/restrito/app/produto/gerenciar_estoque.xhtml"/>
+                            outcome="/restrito/estoque/gerenciar_estoque.xhtml"/>
 
             </p:menuButton>
 
@@ -81,7 +77,7 @@
             <p:menuButton icon="pi pi-user">
 
                 <p:menuitem value="Meu Perfil"
-                            outcome="/restrito/app/perfil/perfil_usuario.xhtml?faces-redirect=true"/>
+                            outcome="/restrito/usuario/perfil_usuario.xhtml"/>
 
                 <p:menuitem value="Sair"
                             icon="pi pi-sign-out"
