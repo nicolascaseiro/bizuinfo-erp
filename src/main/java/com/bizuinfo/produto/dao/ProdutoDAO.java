@@ -44,10 +44,10 @@ public class ProdutoDAO extends GenericoDAO<Produto> {
             em.getTransaction().begin();
 
             em.createQuery("""
-                UPDATE Produto p
-                SET p.categoria = NULL
-                WHERE p.categoria = :categoriaId
-                """)
+                            UPDATE Produto p
+                            SET p.categoria = NULL
+                            WHERE p.categoria.id = :categoriaId
+                            """)
                     .setParameter("categoriaId", categoriaId)
                     .executeUpdate();
 

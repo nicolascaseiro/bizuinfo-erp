@@ -140,9 +140,7 @@ public class CategoriaBean implements Serializable {
         try {
 
             categoriaService.criarCategoria(nomeNovaCategoria);
-
             carregarCategorias();
-
             nomeNovaCategoria = "";
 
             FacesContext.getCurrentInstance().addMessage(

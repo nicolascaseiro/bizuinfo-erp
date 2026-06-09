@@ -4,6 +4,7 @@ import com.bizuinfo.usuario.dao.UsuarioDAO;
 import com.bizuinfo.usuario.model.Usuario;
 import com.bizuinfo.usuario.service.LogAuditoriaService;
 
+import com.bizuinfo.web.Paginas;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.faces.application.FacesMessage;
@@ -207,11 +208,9 @@ public class PerfilBean implements Serializable {
 
         String destino = switch (usuario.getRole()) {
 
-            case ADMIN -> ctx + "/restrito/app/admin/dashboard_admin.xhtml";
-
-            case GERENTE -> ctx + "/restrito/app/gerente/dashboard_gerente.xhtml";
-
-            default -> ctx + "/restrito/app/funcionario/dashboard.xhtml";
+            case ADMIN -> ctx + Paginas.DASHBOARD_ADMIN;
+            case GERENTE -> ctx + Paginas.DASHBOARD_GERENTE;
+            default -> ctx + Paginas.DASHBOARD_FUNCIONARIO;
         };
 
         FacesContext.getCurrentInstance()

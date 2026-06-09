@@ -28,7 +28,6 @@ public class CategoriaService {
     public void excluirCategoria(Long categoriaId) {
 
         produtoDAO.removerCategoriaDosProdutos(categoriaId);
-
         categoriaDAO.remover(categoriaId);
     }
 

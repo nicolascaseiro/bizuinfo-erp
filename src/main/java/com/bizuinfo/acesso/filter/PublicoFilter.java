@@ -39,7 +39,7 @@ public class PublicoFilter implements Filter {
                 destino = Paginas.DASHBOARD_GERENTE;
 
             } else {
-                destino = Paginas.DASHBOARD;
+                destino = Paginas.DASHBOARD_FUNCIONARIO;
             }
 
             res.sendRedirect(req.getContextPath() + destino);

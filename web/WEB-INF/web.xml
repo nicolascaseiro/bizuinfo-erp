@@ -48,6 +48,6 @@
 
     <error-page>
         <exception-type>jakarta.faces.application.ViewExpiredException</exception-type>
-        <location>/publico/acesso_negado.xhtml</location>
+        <location>/publico/acesso/acesso_negado.xhtml</location>
     </error-page>
 </web-app>

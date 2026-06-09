@@ -67,19 +67,16 @@ public class LoginBean implements Serializable {
                         .getSessionMap()
                         .put("usuario", usuario);
 
-                return switch (usuario.getRole()) {
+                return switch (usuarioLogado.getRole()) {
 
-                    case ADMIN ->
-                            Paginas.DASHBOARD_ADMIN
-                                    + "?faces-redirect=true";
+                    case ADMIN -> Paginas.DASHBOARD_ADMIN
+                            + "?faces-redirect=true";
 
-                    case GERENTE ->
-                            Paginas.DASHBOARD_GERENTE
-                                    + "?faces-redirect=true";
+                    case GERENTE -> Paginas.DASHBOARD_GERENTE
+                            + "?faces-redirect=true";
 
-                    default ->
-                            Paginas.DASHBOARD
-                                    + "?faces-redirect=true";
+                    default -> Paginas.DASHBOARD_FUNCIONARIO
+                            + "?faces-redirect=true";
                 };
             }
         }

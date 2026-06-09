@@ -30,7 +30,17 @@ public class ConsumirTokenRecuperacaoBean {
                 .getSessionMap()
                 .put("usuario", usuario);
 
-        return Paginas.DASHBOARD + "?faces-redirect=true";
+        return switch (usuario.getRole()) {
+
+            case ADMIN -> Paginas.DASHBOARD_ADMIN
+                    + "?faces-redirect=true";
+
+            case GERENTE -> Paginas.DASHBOARD_GERENTE
+                    + "?faces-redirect=true";
+
+            default -> Paginas.DASHBOARD_FUNCIONARIO
+                    + "?faces-redirect=true";
+        };
     }
 
     public String getToken() {
