@@ -57,7 +57,7 @@
                     </p:column>
 
                     <p:column headerText="Categoria" style="text-align: center;">
-                        <h:outputText value="#{p.categoria.nome}" />
+                        <h:outputText value="#{empty p.categoria or empty p.categoria.nome ? 'Sem Categoria' : p.categoria.nome}" />
                     </p:column>
 
                     <p:column headerText="Estoque Atual" style="text-align: center;">
