@@ -2,6 +2,7 @@ package com.bizuinfo.venda.service;
 
 import com.bizuinfo.infra.util.JPAutil;
 import com.bizuinfo.produto.model.Produto;
+import com.bizuinfo.usuario.model.Usuario;
 import com.bizuinfo.usuario.service.LogAuditoriaService;
 import com.bizuinfo.venda.model.ItemVenda;
 import com.bizuinfo.venda.model.Pagamento;
@@ -27,6 +28,14 @@ public class VendaService {
         EntityManager em = JPAutil.getEntityManager();
 
         try {
+
+            if (venda == null) {
+                throw new RuntimeException("Venda não informada.");
+            }
+
+            if (venda.getUsuario() == null) {
+                throw new RuntimeException("Usuário da venda não foi informado.");
+            }
 
             em.getTransaction().begin();
 
@@ -79,15 +88,21 @@ public class VendaService {
 
             venda.setValorTotal(valorTotal);
 
-            em.persist(venda);
+            Usuario usuarioGerenciado = em.find(
+                    Usuario.class,
+                    venda.getUsuario().getId()
+            );
 
+            venda.setUsuario(usuarioGerenciado);
+
+            em.persist(venda);
             em.flush();
 
             for (ItemVenda item : itens) {
 
                 item.setVenda(venda);
 
-                em.persist(item);
+                em.merge(item);
             }
 
             pagamento.setVenda(venda);
@@ -96,12 +111,19 @@ public class VendaService {
 
             em.getTransaction().commit();
 
+            String emailUsuario = venda.getUsuario() != null
+                    ? venda.getUsuario().getEmail()
+                    : "DESCONHECIDO";
+
             logAuditoriaService.registrar(
                     "VENDA_FINALIZADA",
-                    "Venda ID " + venda.getId() +
-                            " valor total " + venda.getValorTotal() +
-                            " itens " + itens.size(),
-                    venda.getUsuario().getEmail()
+                    String.format(
+                            "Venda #%d finalizada no valor de R$ %.2f contendo %d item(ns)",
+                            venda.getId(),
+                            venda.getValorTotal(),
+                            itens.size()
+                    ),
+                    venda.getUsuario().getNome()
             );
 
             return venda;

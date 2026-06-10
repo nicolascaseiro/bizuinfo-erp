@@ -40,31 +40,34 @@
                     <h:outputText value="#{item.produto.nome}"/>
                 </p:column>
 
-                <p:column headerText="Qtd">
+                <p:column headerText="Quantidade">
                     <h:outputText value="#{item.quantidade}"/>
                 </p:column>
 
-                <p:column headerText="Unitário">
+                <p:column headerText="Valor Unitário">
                     <h:outputText value="#{item.valorUnitario}">
-                        <f:convertNumber minFractionDigits="2"
-                                         maxFractionDigits="2"/>
+                        <f:convertNumber type="currency"
+                                         currencySymbol="R$"
+                                         locale="pt_BR"/>
                     </h:outputText>
                 </p:column>
 
                 <p:column headerText="Subtotal">
                     <h:outputText value="#{item.subtotal}">
-                        <f:convertNumber minFractionDigits="2"
-                                         maxFractionDigits="2"/>
+                        <f:convertNumber type="currency"
+                                         currencySymbol="R$"
+                                         locale="pt_BR"/>
                     </h:outputText>
                 </p:column>
 
             </p:dataTable>
 
             <h3>
-                Total: R$
+                Total:
                 <h:outputText value="#{carrinhoBean.valorTotal}">
-                    <f:convertNumber minFractionDigits="2"
-                                     maxFractionDigits="2"/>
+                    <f:convertNumber type="currency"
+                                     currencySymbol="R$"
+                                     locale="pt_BR"/>
                 </h:outputText>
             </h3>
 
@@ -83,9 +86,50 @@
                 <f:selectItem itemLabel="Cartão de Débito" itemValue="CARTAO_DEBITO"/>
                 <f:selectItem itemLabel="Boleto" itemValue="BOLETO"/>
 
+                <p:ajax update="painelPix"/>
+
             </p:selectOneRadio>
 
         </div>
+
+        <p:outputPanel id="painelPix">
+
+            <p:panel
+                    header="Pagamento PIX"
+                    rendered="#{checkoutBean.formaPagamento eq 'PIX'}">
+
+                <p:commandButton
+                        value="Gerar PIX"
+                        icon="pi pi-qrcode"
+                        actionListener="#{checkoutBean.gerarPix}"
+                        update="painelPix growl"/>
+
+                <h:panelGroup rendered="#{checkoutBean.pixGerado}">
+
+                    <br/>
+
+                    <h:graphicImage
+                            value="#{checkoutBean.qrCodePix}"
+                            width="250"
+                            height="250"/>
+
+                    <br/><br/>
+
+                    <h:outputText
+                            value="Chave PIX: #{checkoutBean.chavePix}"/>
+
+                    <br/><br/>
+
+                    <h:outputText
+                            value="Código PIX: #{checkoutBean.codigoPix}"/>
+
+                    <br/><br/>
+
+                </h:panelGroup>
+
+            </p:panel>
+
+        </p:outputPanel>
 
         <div class="container-tabela">
 

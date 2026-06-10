@@ -20,7 +20,7 @@
 
             <p:button value="Voltar"
                       icon="pi pi-arrow-left"
-                      outcome="/restrito/venda/consultar_produtos_venda.xhtml"/>
+                      outcome="/restrito/venda/minhas_vendas.xhtml"/>
 
             <div class="spacer"> </div>
 
@@ -28,8 +28,8 @@
 
             <div class="spacer"> </div>
 
-            <p:commandButton value="Imprimir PDF"
-                             icon="pi pi-print"
+            <p:commandButton value="Baixar PDF"
+                             icon="pi pi-download"
                              actionListener="#{reciboVendaBean.baixarPdf}"
                              ajax="false"
                              styleClass="ui-button-success"/>
@@ -45,7 +45,7 @@
             </p>
 
             <p>
-                <b>Data:</b> #{reciboVendaBean.venda.dataVenda}
+                <b>Data:</b> #{reciboVendaBean.venda.dataVendaFormatada}
             </p>
 
             <p>
@@ -66,21 +66,23 @@
                     <h:outputText value="#{item.produto.nome}"/>
                 </p:column>
 
-                <p:column headerText="Qtd">
+                <p:column headerText="Quantidade">
                     <h:outputText value="#{item.quantidade}"/>
                 </p:column>
 
-                <p:column headerText="Valor Unit.">
+                <p:column headerText="Valor Unitário">
                     <h:outputText value="#{item.valorUnitario}">
-                        <f:convertNumber minFractionDigits="2"
-                                         maxFractionDigits="2"/>
+                        <f:convertNumber type="currency"
+                                         currencySymbol="R$"
+                                         locale="pt_BR"/>
                     </h:outputText>
                 </p:column>
 
                 <p:column headerText="Subtotal">
                     <h:outputText value="#{item.subtotal}">
-                        <f:convertNumber minFractionDigits="2"
-                                         maxFractionDigits="2"/>
+                        <f:convertNumber type="currency"
+                                         currencySymbol="R$"
+                                         locale="pt_BR"/>
                     </h:outputText>
                 </p:column>
 
@@ -104,10 +106,11 @@
             </p>
 
             <h3>
-                Total: R$
-                <h:outputText value="#{reciboVendaBean.venda.pagamento.valor}">
-                    <f:convertNumber minFractionDigits="2"
-                                     maxFractionDigits="2"/>
+                Total:
+                <h:outputText value="#{reciboVendaBean.venda.valorTotal}">
+                    <f:convertNumber type="currency"
+                                     currencySymbol="R$"
+                                     locale="pt_BR"/>
                 </h:outputText>
             </h3>
 

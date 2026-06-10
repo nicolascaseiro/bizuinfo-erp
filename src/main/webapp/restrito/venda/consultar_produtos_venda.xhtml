@@ -54,15 +54,15 @@
                 <p:column headerText="Estoque"
                           sortBy="#{p.produto.estoqueAtual}">
 
-                    <h:outputText value="#{p.produto.estoqueAtual}"
-                                  style="font-weight: bold; color: #{p.estoqueAtual le p.estoqueMinimo ? 'red' : 'green'};"/>
+                    <h:outputText value="#{p.produto.estoqueAtual}"/>
                 </p:column>
 
                 <p:column headerText="Preço"
                           sortBy="#{p.produto.preco}">
                     <h:outputText value="#{p.produto.preco}">
-                        <f:convertNumber minFractionDigits="2"
-                                         maxFractionDigits="2"/>
+                        <f:convertNumber type="currency"
+                                         currencySymbol="R$"
+                                         locale="pt_BR"/>
                     </h:outputText>
                 </p:column>
 
@@ -101,21 +101,23 @@
                     <h:outputText value="#{item.produto.nome}"/>
                 </p:column>
 
-                <p:column headerText="Qtd">
+                <p:column headerText="Quantidade">
                     <h:outputText value="#{item.quantidade}"/>
                 </p:column>
 
-                <p:column headerText="Unitário">
+                <p:column headerText="Valor Unitário">
                     <h:outputText value="#{item.valorUnitario}">
-                        <f:convertNumber minFractionDigits="2"
-                                         maxFractionDigits="2"/>
+                        <f:convertNumber type="currency"
+                                         currencySymbol="R$"
+                                         locale="pt_BR"/>
                     </h:outputText>
                 </p:column>
 
                 <p:column headerText="Subtotal">
                     <h:outputText value="#{item.subtotal}">
-                        <f:convertNumber minFractionDigits="2"
-                                         maxFractionDigits="2"/>
+                        <f:convertNumber type="currency"
+                                         currencySymbol="R$"
+                                         locale="pt_BR"/>
                     </h:outputText>
                 </p:column>
 
@@ -133,10 +135,11 @@
 
             <!-- TOTAL -->
             <h3 style="margin-top:15px;">
-                Total: R$
+                Total:
                 <h:outputText value="#{carrinhoBean.valorTotal}">
-                    <f:convertNumber minFractionDigits="2"
-                                     maxFractionDigits="2"/>
+                    <f:convertNumber type="currency"
+                                     currencySymbol="R$"
+                                     locale="pt_BR"/>
                 </h:outputText>
             </h3>
 
