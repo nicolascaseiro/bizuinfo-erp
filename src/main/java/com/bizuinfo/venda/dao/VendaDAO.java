@@ -1,8 +1,13 @@
 package com.bizuinfo.venda.dao;
 
 import com.bizuinfo.infra.dao.GenericoDAO;
+import com.bizuinfo.infra.util.JPAutil;
 import com.bizuinfo.venda.model.Venda;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.EntityManager;
+
+import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class VendaDAO extends GenericoDAO<Venda> {
@@ -11,4 +16,50 @@ public class VendaDAO extends GenericoDAO<Venda> {
         super(Venda.class);
     }
 
+    public Optional<Venda> buscarCompletamente(Long id) {
+
+        EntityManager em = JPAutil.getEntityManager();
+
+        try {
+
+            Venda venda = em.createQuery("""
+                SELECT v FROM Venda v
+                LEFT JOIN FETCH v.itens i
+                LEFT JOIN FETCH i.produto
+                LEFT JOIN FETCH v.pagamento
+                LEFT JOIN FETCH v.usuario
+                WHERE v.id = :id
+            """, Venda.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+
+            return Optional.of(venda);
+
+        } catch (Exception e) {
+            return Optional.empty();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Venda> buscarPorUsuario(Long usuarioId) {
+
+        EntityManager em = JPAutil.getEntityManager();
+
+        try {
+            return em.createQuery("""
+            SELECT DISTINCT v FROM Venda v
+            LEFT JOIN FETCH v.itens i
+            LEFT JOIN FETCH i.produto
+            LEFT JOIN FETCH v.pagamento
+            WHERE v.usuario.id = :usuarioId
+            ORDER BY v.dataVenda DESC
+        """, Venda.class)
+                    .setParameter("usuarioId", usuarioId)
+                    .getResultList();
+
+        } finally {
+            em.close();
+        }
+    }
 }

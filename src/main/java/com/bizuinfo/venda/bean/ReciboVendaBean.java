@@ -44,9 +44,8 @@ public class ReciboVendaBean implements Serializable {
 
             Long vendaId = Long.parseLong(params.get("vendaId"));
 
-            this.venda = vendaDAO
-                    .buscarPorId(vendaId)
-                    .orElseThrow();
+            this.venda = vendaDAO.buscarCompletamente(vendaId)
+                    .orElseThrow(() -> new RuntimeException("Venda não encontrada"));
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -22,6 +22,9 @@ public class EstoqueBean implements Serializable {
     @Inject
     private ProdutoDAO produtoDAO;
 
+    @Inject
+    private SessaoBean sessaoBean;
+
     @EJB
     private EstoqueService estoqueService;
 
@@ -45,7 +48,11 @@ public class EstoqueBean implements Serializable {
 
     public void salvarMovimentacao() {
         try {
-            estoqueService.movimentarEstoque(produtoSelecionado.getId(), quantidadeMovimentacao);
+            estoqueService.movimentarEstoque(
+                    produtoSelecionado.getId(),
+                    quantidadeMovimentacao,
+                    sessaoBean.getUsuarioLogado()
+            );
             carregarProdutos(); // Atualiza a tabela com o novo valor calculado
 
             FacesContext.getCurrentInstance().addMessage(null,

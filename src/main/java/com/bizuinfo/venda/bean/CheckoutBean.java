@@ -52,25 +52,37 @@ public class CheckoutBean implements Serializable {
 
             Usuario usuario = sessaoBean.getUsuarioLogado();
 
-            // Cria venda
+            if (usuario == null) {
+                Object sessionUser = FacesContext.getCurrentInstance()
+                        .getExternalContext()
+                        .getSessionMap()
+                        .get("usuario");
+
+                if (sessionUser instanceof Usuario) {
+                    usuario = (Usuario) sessionUser;
+                    sessaoBean.login(usuario); // sincroniza sessão bean
+                }
+            }
+
+            if (usuario == null) {
+                throw new RuntimeException("Usuário não autenticado na sessão.");
+            }
+
             Venda venda = new Venda();
             venda.setUsuario(usuario);
             venda.setDataVenda(LocalDateTime.now());
 
-            // Pagamento (único)
             Pagamento pagamento = new Pagamento();
             pagamento.setFormaPagamento(formaPagamento);
             pagamento.setStatusPagamento(StatusPagamento.APROVADO);
             pagamento.setValor(carrinhoBean.getValorTotal());
 
-            // Executa venda (regra central no service)
             vendaFinalizada = vendaService.finalizarVenda(
                     venda,
                     pagamento,
                     carrinhoBean.getItens()
             );
 
-            // limpa carrinho após sucesso
             carrinhoBean.limparCarrinho();
 
             FacesContext.getCurrentInstance().addMessage(
@@ -82,7 +94,6 @@ public class CheckoutBean implements Serializable {
                     )
             );
 
-            // redireciona para recibo
             return "/restrito/venda/recibo_venda.xhtml?faces-redirect=true&vendaId="
                     + vendaFinalizada.getId();
 

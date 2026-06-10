@@ -3,6 +3,7 @@ package com.bizuinfo.produto.service;
 import com.bizuinfo.infra.service.EmailService;
 import com.bizuinfo.produto.dao.ProdutoDAO;
 import com.bizuinfo.produto.model.Produto;
+import com.bizuinfo.usuario.model.Usuario;
 import com.bizuinfo.usuario.service.LogAuditoriaService;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
@@ -24,7 +25,8 @@ public class EstoqueService {
 
     private static final String EMAIL_GERENCIA = "bizuinfo.contato@gmail.com";
 
-    public void movimentarEstoque(Long idProduto, int quantidade) {
+    public void movimentarEstoque(Long idProduto, int quantidade, Usuario usuario) {
+
         Optional<Produto> opt = produtoDAO.buscarPorId(idProduto);
 
         if (opt.isPresent()) {
@@ -35,14 +37,27 @@ public class EstoqueService {
                 novoEstoque = 0;
             }
 
+            int estoqueAnterior = produto.getEstoqueAtual();
+
             produto.setEstoqueAtual(novoEstoque);
             produtoDAO.salvar(produto);
 
+            String tipoMovimentacao =
+                    quantidade >= 0 ? "Entrada" : "Saída";
+
             logAuditoriaService.registrar(
                     "MOVIMENTACAO_ESTOQUE",
-                    "Produto " + produto.getNome() +
-                            " novo estoque: " + produto.getEstoqueAtual(),
-                    "SYSTEM"
+                    tipoMovimentacao
+                            + " de "
+                            + Math.abs(quantidade)
+                            + " unidade(s) no produto '"
+                            + produto.getNome()
+                            + "' ("
+                            + estoqueAnterior
+                            + " → "
+                            + novoEstoque
+                            + ")",
+                    usuario.getNome()
             );
 
             verificarAlerta(produto);

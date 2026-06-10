@@ -25,6 +25,7 @@ public class VendaPDFService {
 
             // ===== TÍTULO =====
             Font titleFont = new Font(Font.HELVETICA, 16, Font.BOLD);
+
             Paragraph title = new Paragraph("RECIBO DE VENDA", titleFont);
             title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);
@@ -53,16 +54,19 @@ public class VendaPDFService {
             ));
 
             document.add(new Paragraph(" "));
-            document.add(new Paragraph("ITENS", titleFont));
+
+            // ===== ITENS =====
+            Font sectionTitle = new Font(Font.HELVETICA, 14, Font.BOLD);
+
+            document.add(new Paragraph("ITENS", sectionTitle));
             document.add(new Paragraph(" "));
 
-            // ===== TABELA =====
             PdfPTable table = new PdfPTable(4);
             table.setWidthPercentage(100);
 
             addHeader(table, "Produto");
-            addHeader(table, "Qtd");
-            addHeader(table, "Unitário");
+            addHeader(table, "Quantidade");
+            addHeader(table, "Valor Unitário");
             addHeader(table, "Subtotal");
 
             double total = 0.0;
@@ -81,8 +85,58 @@ public class VendaPDFService {
 
             document.add(new Paragraph(" "));
 
+            // ===== FORMA DE PAGAMENTO =====
+
+           String formaPagamento;
+
+            switch (venda.getPagamento().getFormaPagamento()) {
+
+                case PIX ->
+                        formaPagamento = "PIX";
+
+                case CARTAO_CREDITO ->
+                        formaPagamento = "Cartão de Crédito";
+
+                case CARTAO_DEBITO ->
+                        formaPagamento = "Cartão de Débito";
+
+                case BOLETO ->
+                        formaPagamento = "Boleto";
+
+                default ->
+                        formaPagamento = "Não informado";
+            }
+
+            Font pagamentoLabelFont =
+                    new Font(Font.HELVETICA, 12, Font.BOLD);
+
+            Font pagamentoValueFont =
+                    new Font(Font.HELVETICA, 12);
+
+            Paragraph pagamentoParagraph = new Paragraph();
+
+            pagamentoParagraph.add(
+                    new Chunk(
+                            "FORMA DE PAGAMENTO: ",
+                            pagamentoLabelFont
+                    )
+            );
+
+            pagamentoParagraph.add(
+                    new Chunk(
+                            formaPagamento,
+                            pagamentoValueFont
+                    )
+            );
+
+            pagamentoParagraph.setAlignment(Element.ALIGN_RIGHT);
+
+            document.add(pagamentoParagraph);
+
             // ===== TOTAL DESTACADO =====
-            Font totalFont = new Font(Font.HELVETICA, 14, Font.BOLD);
+
+            Font totalFont =
+                    new Font(Font.HELVETICA, 14, Font.BOLD);
 
             Paragraph totalParagraph = new Paragraph(
                     "TOTAL: R$ " + String.format("%.2f", total),
@@ -91,7 +145,6 @@ public class VendaPDFService {
 
             totalParagraph.setAlignment(Element.ALIGN_RIGHT);
             document.add(totalParagraph);
-
             document.close();
 
             return out.toByteArray();
