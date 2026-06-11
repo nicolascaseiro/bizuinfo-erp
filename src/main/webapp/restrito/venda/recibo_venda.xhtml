@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Recibo de Venda</title>
+
+    <h:outputStylesheet library="css" name="global.css"/>
+    <h:outputStylesheet library="css" name="produto.css"/>
+</h:head>
+
+<h:body>
+
+    <h:form id="form">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+
+            <p:button value="Voltar"
+                      icon="pi pi-arrow-left"
+                      outcome="/restrito/venda/minhas_vendas.xhtml"/>
+
+            <div class="spacer"> </div>
+
+            <h:outputText value="Recibo de Venda"/>
+
+            <div class="spacer"> </div>
+
+            <p:commandButton value="Baixar PDF"
+                             icon="pi pi-download"
+                             actionListener="#{reciboVendaBean.baixarPdf}"
+                             ajax="false"
+                             styleClass="ui-button-success"/>
+        </div>
+
+        <!-- VENDA -->
+        <div class="container-tabela">
+
+            <h3>Dados da Venda</h3>
+
+            <p>
+                <b>ID:</b> #{reciboVendaBean.venda.id}
+            </p>
+
+            <p>
+                <b>Data:</b> #{reciboVendaBean.venda.dataVendaFormatada}
+            </p>
+
+            <p>
+                <b>Usuário:</b> #{reciboVendaBean.venda.usuario.nome}
+            </p>
+
+        </div>
+
+        <!-- ITENS -->
+        <div class="container-tabela">
+
+            <h3>Itens</h3>
+
+            <p:dataTable value="#{reciboVendaBean.venda.itens}"
+                         var="item">
+
+                <p:column headerText="Produto">
+                    <h:outputText value="#{item.produto.nome}"/>
+                </p:column>
+
+                <p:column headerText="Quantidade">
+                    <h:outputText value="#{item.quantidade}"/>
+                </p:column>
+
+                <p:column headerText="Valor Unitário">
+                    <h:outputText value="#{item.valorUnitario}">
+                        <f:convertNumber type="currency"
+                                         currencySymbol="R$"
+                                         locale="pt_BR"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Subtotal">
+                    <h:outputText value="#{item.subtotal}">
+                        <f:convertNumber type="currency"
+                                         currencySymbol="R$"
+                                         locale="pt_BR"/>
+                    </h:outputText>
+                </p:column>
+
+            </p:dataTable>
+
+        </div>
+
+        <!-- PAGAMENTO -->
+        <div class="container-tabela">
+
+            <h3>Pagamento</h3>
+
+            <p>
+                <b>Forma:</b>
+                #{reciboVendaBean.venda.pagamento.formaPagamento}
+            </p>
+
+            <p>
+                <b>Status:</b>
+                #{reciboVendaBean.venda.pagamento.statusPagamento}
+            </p>
+
+            <h3>
+                Total:
+                <h:outputText value="#{reciboVendaBean.venda.valorTotal}">
+                    <f:convertNumber type="currency"
+                                     currencySymbol="R$"
+                                     locale="pt_BR"/>
+                </h:outputText>
+            </h3>
+
+        </div>
+
+    </h:form>
+
+</h:body>
+</html>
