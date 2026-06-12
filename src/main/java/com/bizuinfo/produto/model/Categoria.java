@@ -23,7 +23,9 @@ public class Categoria {
     }
 
     public String getNome() {
-        return nome;
+        return (nome != null) ?
+                nome :
+                "Sem Categoria";
     }
 
     public Long getId() {
