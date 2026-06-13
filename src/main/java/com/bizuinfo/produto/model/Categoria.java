@@ -35,4 +35,18 @@ public class Categoria {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (!(o instanceof Categoria categoria)) return false;
+
+        return id != null && id.equals(categoria.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

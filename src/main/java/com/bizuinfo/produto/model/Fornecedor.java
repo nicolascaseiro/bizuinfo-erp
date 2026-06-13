@@ -45,7 +45,18 @@ public class Fornecedor {
 
     public List<Produto> getProdutosFornecidos() { return produtosFornecidos; }
     public void setProdutosFornecidos(List<Produto> produtosFornecidos) { this.produtosFornecidos = produtosFornecidos; }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (!(o instanceof Fornecedor fornecedor)) return false;
+
+        return id != null && id.equals(fornecedor.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
-
-
-
