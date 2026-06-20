@@ -15,9 +15,9 @@ Projeto acadêmico voltado para simular um sistema ERP completo, com módulos ad
 - Java (JSF + PrimeFaces)
 - EJB 3.2
 - JPA / Hibernate 6
-- Banco de dados relacional (PostgreSQL / MySQL)
+- Banco de dados relacional (MySQL)
 - Docker / Docker Compose
-- Spring Security (ou JAAS, dependendo da configuração)
+- Spring Security
 
 ---
 
