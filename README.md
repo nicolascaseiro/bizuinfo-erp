@@ -46,10 +46,10 @@ Projeto acadêmico voltado para simular um sistema ERP completo, com módulos ad
 Na raiz do projeto (onde está o `docker-compose.deploy.yml`):
 
 ```bash
-docker build -t bizuinfoerp-app .
+    docker build -t bizuinfoerp-app .
 
-docker compose -f docker-compose.deploy.yml up
-```
+    docker compose -f docker-compose.deploy.yml up
+    ```
 
 A aplicação ficará disponível em:
 
@@ -60,6 +60,7 @@ http://localhost:8080
 ### ⛔ Parando a aplicação
 
 ```bash
-docker compose -f docker-compose.deploy.yml down
-```
+    docker compose -f docker-compose.deploy.yml down
+    ```
+
 ou encerre pelo Docker Desktop.
