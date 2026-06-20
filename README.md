@@ -48,8 +48,8 @@ Na raiz do projeto (onde está o `docker-compose.deploy.yml`):
 ```bash
 docker build -t bizuinfoerp-app .
 
-```bash
 docker compose -f docker-compose.deploy.yml up
+```
 
 A aplicação ficará disponível em:
 
@@ -61,5 +61,5 @@ http://localhost:8080
 
 ```bash
 docker compose -f docker-compose.deploy.yml down
-
+```
 ou encerre pelo Docker Desktop.
